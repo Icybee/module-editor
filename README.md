@@ -1,6 +1,7 @@
 # Editor [![Build Status](https://travis-ci.org/Icybee/module-editor.png?branch=master)](https://travis-ci.org/Icybee/module-editor)
 
-The Editor module (`editor`) provides an API to manage and use editors, as well as several editors.
+The Editor module (`editor`) provides an API to manage and use editors, and comes with several
+editors.
 
 Different editors are used to enter the contents of the CMS [Icybee](http://icybee.org/). Whether
 it's the body of an article or its excerpt, the description of a file, the content of a page… from
@@ -24,7 +25,7 @@ The following editors are provided by the module:
 
 
 
-## Defining an editor
+## Editors
 
 The API provided by the module defines the interface common to all editors. They
 must be able to serialize/unserialize and render the content type they support. They also must
@@ -76,8 +77,10 @@ supported by the editor into a plain string that can be easily stored in a datab
 ```php
 <?php
 
+namespace ICanBoogie\Modules\Editor;
+
 $content = "Madonna!";
-$editor = $core->editor['text'];
+$editor = new TextEditor;
 $serialized_content = $editor->serialize($content);
 
 // the serialized content can be stored in the database 
@@ -89,9 +92,11 @@ of a UI element, it needs to be unserialized:
 ```php
 <?php
 
+namespace ICanBoogie\Modules\Editor;
+
 // $serialized_content is coming from the database
 
-$editor = $core->editor['text'];
+$editor = new TextEditor;
 $content = $editor->unserialize($serialized_content);
 $rendered_content = $editor->render($content);
 ```
@@ -106,14 +111,16 @@ can be used as a string. For instance, the `render()` method of the `image` edit
 the identifier of an image and returns an active record that is rendered into an `IMG`
 element when used as a string.
 
-Thus, if we ask the editor to render the content we'll obtain an active record. If we use it
-as a string we'll obtain an HTML string. But we could use the object to obtain a thumbnail
+Thus, if the editor is asked to render the content, an active record is returned. Used as a string
+the active record is rendered as an HTML string. But it could be used to obtain a thumbnail
 instead:
 
 ```php
 <?php
 
-$editor = $core->editor['image'];
+namespace ICanBoogie\Modules\Editor;
+
+$editor = new ImageEditor;
 $image = $editor->render('12');
 
 if ($image)
@@ -168,11 +175,11 @@ class TextEditorElement extends \Brickrouge\Text implements EditorElement
 }
 ```
 
-The returned elements must be instances of the [Element](http://brickrouge.org/docs/class-Brickrouge.Element.html)
+The UI element must be instances of the [Element](http://brickrouge.org/docs/class-Brickrouge.Element.html)
 class, or one of its subclasses. For instance, `TextEditorElement` extends [Text]([Element](http://brickrouge.org/docs/class-Brickrouge.Text.html)
-which extends [Element](http://brickrouge.org/docs/class-Brickrouge.Element.html). One can use the
-many attributes of the [Element](http://brickrouge.org/docs/class-Brickrouge.Element.html) class
-to obtain a fatisfactory element:
+which extends [Element](http://brickrouge.org/docs/class-Brickrouge.Element.html). The many
+attributes of the [Element](http://brickrouge.org/docs/class-Brickrouge.Element.html) class
+can be used to obtain a satisfactory element:
 
 ```php
 <?php
@@ -180,7 +187,7 @@ to obtain a fatisfactory element:
 use Brickrouge\Element;
 use Brickrouge\Group;
 
-$editor = $core->editors['text'];
+$editor = new TextEditor;
 $element = $editor->from(array
 (
     Group::LABEL => 'Title',
@@ -191,21 +198,21 @@ $element = $editor->from(array
 ));
 ```
 
-Note that the content is specified to the editor element using the `value` attribute.
+Note that the content is specified to the UI element using the `value` attribute.
 
 
 
 
 
-## The editor collection
+## Editor collection
 
-The editor collection contains the definition of the available editors. It is used to instantiate
+An editor collection contains the definition of the available editors. It is used to instantiate
 editors, and by extension their UI element:
 
 ```php
 <?php
 
-namespace Icybee\Modules\Editors;
+namespace Icybee\Modules\Editor;
 
 use Brickrouge\Group;
 use Brickrouge\Element;
@@ -221,13 +228,14 @@ $editors = new Collection
 );
 
 $editor = $editors['rte'];
-$editor_element = $editors['rte']->form(array(
+
+$editor_element = $editors['rte']->from(array(
 	Group::LABEL => "Body",
 	Element::REQUIRED => true
 ));
 ```
 
-An editor definition can be modified until it has been used to instanciate an editor. A
+An editor definition can be modified until it has been used to instantiate an editor. A
 `EditorAlreadyInstantiated` exception is thrown in attempt to modify a definition that was
 used to instantiate an editor. The `EditorNotDefined` exception is thrown in attempt to obtain
 an editor whose definition is not defined.
@@ -238,13 +246,20 @@ an editor whose definition is not defined.
 
 ### The _core_ collection
 
-Although one can create and manage its own editor collection, it is recommended to use the _core_
+Although custom collections can be created to manage editors, it is recommended to use the _core_
 collection which is attached to the _core_ object through a lazy getter:
 
 ```php
 <?php
 
 $core->editors;
+
+$editor = $core->editors['rte'];
+
+$editor_element = $core->editors['rte']->from(array(
+	Group::LABEL => "Body",
+	Element::REQUIRED => true
+));
 ```
 
 This collection is created from the `editors` config and can be altered by attaching an event hook
@@ -254,9 +269,10 @@ to the `Icybee\Modules\Editor\Collection::alter` event.
 
 
 
-### Defining the editors of the _core_ collection
+#### Defining the editors of the _core_ collection
 
-The `editors` config is used to define the editors of the _core_ collection.
+The `editors` config is used to define the editors of the _core_ collection. It is recommended to
+define editors this way, unless you don't want an editor to be available to the whole CMS.
 
 ```php
 <?php
@@ -281,7 +297,7 @@ return array
 
 
 
-### Altering the _core_ collection
+#### Altering the _core_ collection
 
 Third parties may use the The `Icybee\Modules\Editor\Collection::alter` event of class
 `Icybee\Modules\Editor\Collection\AlterEvent` to alter the _core_ collection once it has been
@@ -290,7 +306,7 @@ created with the `editors` config.
 ```php
 <?php
 
-use Icybee\Modules\Editors\Collection;
+use Icybee\Modules\Editor\Collection;
 
 $core->events->attach(function(Collection\AlterEvent $event, Collection $target) {
 
@@ -298,6 +314,60 @@ $core->events->attach(function(Collection\AlterEvent $event, Collection $target)
 
 });
 ```
+
+
+
+
+
+## A multi-editor
+
+Having so many editors to play with is very nice and it would be a shame to provide only an RTE
+editor when a Markdown editor or a raw HTML editor could also be used, if not prefered by the user.
+In order to answer to this situation, the module provides a multi-editor, a shell that can swap
+editors to edit content.
+
+The [Contents](https://github.com/Icybee/module-contents) module uses this editor so that the user
+can decide which editor to use to edit and render its content:
+
+```php
+<?php
+
+namespace Icybee\Modules\Contents;
+
+// …
+
+use Icybee\Modules\Editor\MultiEditorElement;
+
+class EditBlock extends \Icybee\Modules\Nodes\EditBlock
+{
+	protected function get_children()
+	{
+		// …
+		
+		Content::BODY => new MultiEditorElement
+		(
+			$values['editor'] ? $values['editor'] : $default_editor, array
+			(
+				Element::LABEL_MISSING => 'Contents',
+				Element::GROUP => 'contents',
+				Element::REQUIRED => true,
+
+				'rows' => 16
+			)
+		)
+		
+		// …
+	}
+}
+```
+
+The `tabbable` editor uses this editor for each of its tabs, allowing the user to use
+an RTE editor in the first, a Markdown editor is the second and a `tabbable` editor in
+the third (Inception !).
+
+Currently using the multi-editor requires an extra field to store the editor configured by the
+user. Its name can be specified using the `SELECTOR_NAME` attribute, it defaults to `editor`.
+
 
 
 
