@@ -1,26 +1,33 @@
-EDITOR = ./assets/editor
-EDITOR_UNCOMPRESSED = ./assets/editor-uncompressed
+CSS_COMPRESSED = assets/editor.css
+CSS_UNCOMPRESSED = assets/editor-uncompressed.css
 
-main:
-	@cat ./mooeditable/Source/MooEditable/MooEditable.js \
-	./mooeditable/Source/MooEditable/MooEditable.UI.MenuList.js \
-	./mooeditable/Source/MooEditable/MooEditable.Extras.js \
-	./mooeditable/Source/MooEditable/MooEditable.Paste.js \
-	./mooeditable/Source/MooEditable/MooEditable.CleanPaste.js \
-	./mooeditable/Source/MooEditable/MooEditable.Outline.js \
-	./mooeditable/Source/MooEditable/MooEditable.Image.js \
-	./build/stub.js \
-	> ${EDITOR_UNCOMPRESSED}.js
+CSS_FILES = \
+	mooeditable/Assets/MooEditable/MooEditable.css \
+	mooeditable/Assets/MooEditable/MooEditable.Paste.css
 
-	@cat ./mooeditable/Assets/MooEditable/MooEditable.css \
-	./mooeditable/Assets/MooEditable/MooEditable.Image.css \
-	./mooeditable/Assets/MooEditable/MooEditable.Extras.css \
-	./mooeditable/Assets/MooEditable/MooEditable.SilkTheme.css \
-	./mooeditable/Assets/MooEditable/MooEditable.Paste.css \
-	> ${EDITOR_UNCOMPRESSED}.css
+JS_COMPRESSED = assets/editor.js
+JS_UNCOMPRESSED = assets/editor-uncompressed.js
 	
-	@cp ./mooeditable/Assets/MooEditable/icons.png ./assets/icons.png
-	@cp ./mooeditable/Assets/MooEditable/images/mooeditable-toolbarbuttons-silk.png ./assets/images/mooeditable-toolbarbuttons-silk.png
+JS_FILES = \
+	mooeditable/Source/MooEditable/MooEditable.js \
+	mooeditable/Source/MooEditable/MooEditable.UI.MenuList.js \
+	mooeditable/Source/MooEditable/MooEditable.Extras.js \
+	mooeditable/Source/MooEditable/MooEditable.Paste.js \
+	mooeditable/Source/MooEditable/MooEditable.CleanPaste.js \
+	mooeditable/Source/MooEditable/MooEditable.Outline.js \
+	mooeditable/Source/MooEditable/MooEditable.Image.js \
+	build/stub.js
 
-	@php ./build/compress.php ${EDITOR_UNCOMPRESSED}.js ${EDITOR}.js;
-	@cp ${EDITOR_UNCOMPRESSED}.css ${EDITOR}.css
+main: $(CSS_UNCOMPRESSED) $(CSS_COMPRESSED) $(JS_UNCOMPRESSED) $(JS_COMPRESSED)
+
+$(CSS_UNCOMPRESSED): $(CSS_FILES)
+	cat $^ >$@
+	
+$(CSS_COMPRESSED): $(CSS_UNCOMPRESSED)
+	cp $^ $@
+
+$(JS_UNCOMPRESSED): $(JS_FILES)
+	cat $^ >$@
+	
+$(JS_COMPRESSED): $(JS_UNCOMPRESSED)
+	php build/compress.php $^ >$@
