@@ -44,6 +44,52 @@ body.mooeditable-outline td
 {
 	padding: 8px;
 	border: 1px dashed #ccc;
+	background: url(outline-names.png) -1200px 0 no-repeat;
+	border-radius: 3px;
+}
+
+body.mooeditable-outline address {
+	background-position: -1000px 0;
+}
+
+body.mooeditable-outline blockquote {
+	background-position: -900px -15px;
+}
+
+body.mooeditable-outline div {
+	background-position: -800px -30px;
+}
+
+body.mooeditable-outline h1 {
+	background-position: -700px -45px;
+}
+
+body.mooeditable-outline h2 {
+	background-position: -600px -60px;
+}
+
+body.mooeditable-outline h3 {
+	background-position: -500px -75px;
+}
+
+body.mooeditable-outline h4 {
+	background-position: -400px -90px;
+}
+
+body.mooeditable-outline h5 {
+	background-position: -300px -105px;
+}
+
+body.mooeditable-outline h6 {
+	background-position: -200px -120px;
+}
+
+body.mooeditable-outline p {
+	background-position: -100px -135px;
+}
+
+body.mooeditable-outline pre {
+	background-position: 0px -150px;
 }
 
 :focus {
