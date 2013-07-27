@@ -69,20 +69,13 @@ class RTEEditor implements Editor
 				$w = $attributes['width'];
 				$h = $attributes['height'];
 				$nid = $attributes['data-nid'];
+				$src = $attributes['src'];
 
-				if ($w && $h && $nid)
+				$route = $core->routes->find($attributes['src'], $captured);
+
+				if ($route && $route->id == 'api:files:get' && ($w || $h))
 				{
-					$attributes['src'] = Operation::encode('images/' . $nid . '/' . $w . 'x' . $h);
-				}
-				else if (($w || $h) && preg_match('#^/repository/files/image/(\d+)#', $attributes['src'], $matches))
-				{
-					$nid = $matches[1];
-
-					$options = $attributes;
-
-					unset($options['src']);
-
-					$thumbnail = new Thumbnail($core->models['images'][$nid], $options);
+					$thumbnail = new Thumbnail($core->models['images'][$nid ?: hexdec($captured['hexnid'])], "w:{$w};h:{$h};");
 
 					$attributes['src'] = $thumbnail->url;
 				}
@@ -91,8 +84,8 @@ class RTEEditor implements Editor
 
 				if (isset($attributes['data-lightbox']) && $nid)
 				{
-					$attributes['src'] = preg_replace('#\&amp;lightbox=true#', '', $attributes['src']);
-					$path = $core->models['images']->select('path')->filter_by_nid($nid)->rc;
+					$attributes['src'] = preg_replace('#(\?|\&)lightbox=(on|true)#', '', $attributes['src']);
+					$path = $core->models['images'][$nid]->url('get');
 				}
 
 				unset($attributes['data-nid']);
