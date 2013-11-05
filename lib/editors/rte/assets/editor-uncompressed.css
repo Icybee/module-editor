@@ -186,6 +186,7 @@ CUSTOM
 }
 
 .mooeditable-ui-toolbar {
+	color: black;
 	background-color: #E8E8E8;
 	border-bottom: 1px solid #CFCFCF;
 }

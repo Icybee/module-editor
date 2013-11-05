@@ -1,3 +1,4 @@
+CSS_COMPRESSOR = curl -X POST -s --data-urlencode 'input@$^' http://cssminifier.com/raw
 CSS_COMPRESSED = assets/editor.css
 CSS_UNCOMPRESSED = assets/editor-uncompressed.css
 
@@ -5,9 +6,10 @@ CSS_FILES = \
 	mooeditable/Assets/MooEditable/MooEditable.css \
 	mooeditable/Assets/MooEditable/MooEditable.Paste.css
 
+JS_COMPRESSOR = curl -X POST -s --data-urlencode 'input@$^' http://javascript-minifier.com/raw
 JS_COMPRESSED = assets/editor.js
 JS_UNCOMPRESSED = assets/editor-uncompressed.js
-	
+
 JS_FILES = \
 	mooeditable/Source/MooEditable/MooEditable.js \
 	mooeditable/Source/MooEditable/MooEditable.UI.MenuList.js \
@@ -18,16 +20,16 @@ JS_FILES = \
 	mooeditable/Source/MooEditable/MooEditable.Image.js \
 	build/stub.js
 
-main: $(CSS_UNCOMPRESSED) $(CSS_COMPRESSED) $(JS_UNCOMPRESSED) $(JS_COMPRESSED)
+all: $(CSS_UNCOMPRESSED) $(CSS_COMPRESSED) $(JS_UNCOMPRESSED) $(JS_COMPRESSED)
 
 $(CSS_UNCOMPRESSED): $(CSS_FILES)
-	cat $^ >$@
-	
+	cat $^ > $@
+
 $(CSS_COMPRESSED): $(CSS_UNCOMPRESSED)
-	cp $^ $@
+	$(CSS_COMPRESSOR) > $@
 
 $(JS_UNCOMPRESSED): $(JS_FILES)
-	cat $^ >$@
-	
+	cat $^ > $@
+
 $(JS_COMPRESSED): $(JS_UNCOMPRESSED)
-	php build/compress.php $^ >$@
+	$(JS_COMPRESSOR) > $@
