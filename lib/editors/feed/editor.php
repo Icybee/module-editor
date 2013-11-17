@@ -89,7 +89,7 @@ class FeedEditor implements Editor
 
 		$gmt_offset = $core->timezone;
 
-		$fdate = $core->locale->date_formatter;
+		$fdate = $core->locale->calendar->date_formatter;
 		$time_pattern = "y-MM-dd'T'HH:mm:ss";
 
 		$host = preg_replace('#^www\.#', '', $_SERVER['SERVER_NAME']);
