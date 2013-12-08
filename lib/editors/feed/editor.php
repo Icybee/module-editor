@@ -93,7 +93,7 @@ class FeedEditor implements Editor
 		$time_pattern = "y-MM-dd'T'HH:mm:ss";
 
 		$host = preg_replace('#^www\.#', '', $_SERVER['SERVER_NAME']);
-		$page_created = $fdate($page->created, 'y-MM-dd');
+		$page_created_at = $fdate($page->created_at, 'y-MM-dd');
 
 		$entries = $core->models[$constructor]->filter_by_constructor($constructor)->visible->order('date DESC')->limit($limit)->all;
 
@@ -101,7 +101,7 @@ class FeedEditor implements Editor
 
 ?>
 
-	<id>tag:<?= $host ?>,<?= $page_created ?>:<?= $page->slug ?></id>
+	<id>tag:<?= $host ?>,<?= $page_created_at ?>:<?= $page->slug ?></id>
 	<title><?= $page->title ?></title>
 	<link href="<?php echo $page->absolute_url ?>" rel="self" />
 	<link href="<?php echo $page->home->absolute_url ?>" />
@@ -116,9 +116,9 @@ class FeedEditor implements Editor
 
 	foreach ($entries as $entry)
 	{
-		if (strcmp($updated, $entry->modified) < 0)
+		if (strcmp($updated, $entry->updated_at) < 0)
 		{
-			$updated = $entry->modified;
+			$updated = $entry->updated_at;
 		}
 	}
 
@@ -132,8 +132,8 @@ class FeedEditor implements Editor
 	<entry>
 		<title><?= \ICanBoogie\escape($entry->title) ?></title>
 		<link href="<?php echo $entry->absolute_url ?>" />
-		<id>tag:<?= $host ?>,<?php echo $fdate($entry->created, 'y-MM-dd') ?>:<?= $entry->slug ?></id>
-		<updated><?= $fdate($entry->modified, $time_pattern) . $gmt_offset ?></updated>
+		<id>tag:<?= $host ?>,<?php echo $fdate($entry->created_at, 'y-MM-dd') ?>:<?= $entry->slug ?></id>
+		<updated><?= $fdate($entry->updated_at, $time_pattern) . $gmt_offset ?></updated>
 		<published><?= $fdate($entry->date, $time_pattern) . $gmt_offset ?></published>
 		<?php if ($with_author): ?>
 		<author>
