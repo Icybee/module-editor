@@ -57,6 +57,8 @@ class RTEEditorElement extends Element implements EditorElement
 
 		$css = $this[self::STYLESHEETS] ?: array();
 
+		$css[] = Document::resolve_url(\Brickrouge\ASSETS . 'brickrouge.css');
+
 		if (!$css)
 		{
 			$info = \Icybee\Modules\Pages\Module::get_template_info('page.html');
