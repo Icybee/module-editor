@@ -131,7 +131,7 @@ EOT;
 			$html .= $element;
 		}
 
-		return '<div class="tab-content combo">' . $html . '</div>';
+		return '<div class="tab-content widget-bordered">' . $html . '</div>';
 	}
 
 	/**
