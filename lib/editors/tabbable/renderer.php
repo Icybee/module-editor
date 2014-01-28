@@ -76,7 +76,9 @@ EOT;
 
 		foreach ($panes as $i => $pane)
 		{
-			$html .= '<div class="tab-pane';
+			$editor_id = $pane['editor_id'];
+
+			$html .= '<div class="tab-pane editor-' . \ICanBoogie\normalize($editor_id);
 
 			if (!$i)
 			{
