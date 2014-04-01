@@ -27,6 +27,8 @@ object
 	background: fuchsia;
 }
 
+body.mooeditable-outline ol,
+body.mooeditable-outline ul,
 body.mooeditable-outline address,
 body.mooeditable-outline blockquote,
 body.mooeditable-outline div,
@@ -40,56 +42,63 @@ body.mooeditable-outline p,
 body.mooeditable-outline pre,
 body.mooeditable-outline table,
 body.mooeditable-outline th,
-body.mooeditable-outline td
-{
+body.mooeditable-outline td {
 	padding: 8px;
 	border: 1px dashed #ccc;
-	background: url(outline-names.png) -1200px 0 no-repeat;
+	background: url(outline-names.png) -1300px 0 no-repeat;
 	border-radius: 3px;
 }
 
+body.mooeditable-outline ol {
+	background-position: -1200px 0;
+}
+
+body.mooeditable-outline ul {
+	background-position: -1100px -15px;
+}
+
 body.mooeditable-outline address {
-	background-position: -1000px 0;
+	background-position: -1000px -30px;
 }
 
 body.mooeditable-outline blockquote {
-	background-position: -900px -15px;
+	background-position: -900px -45px;
 }
 
 body.mooeditable-outline div {
-	background-position: -800px -30px;
+	background-position: -800px -60px;
 }
 
 body.mooeditable-outline h1 {
-	background-position: -700px -45px;
+	background-position: -700px -75px;
 }
 
 body.mooeditable-outline h2 {
-	background-position: -600px -60px;
+	background-position: -600px -90px;
 }
 
 body.mooeditable-outline h3 {
-	background-position: -500px -75px;
+	background-position: -500px -105px;
 }
 
 body.mooeditable-outline h4 {
-	background-position: -400px -90px;
+	background-position: -400px -120px;
 }
 
 body.mooeditable-outline h5 {
-	background-position: -300px -105px;
+	background-position: -300px -135px;
 }
 
 body.mooeditable-outline h6 {
-	background-position: -200px -120px;
+	background-position: -200px -150px;
 }
 
 body.mooeditable-outline p {
-	background-position: -100px -135px;
+	background-position: -100px -165px;
 }
 
 body.mooeditable-outline pre {
-	background-position: 0px -150px;
+	background-position: 0px -180px;
 }
 
 :focus {
