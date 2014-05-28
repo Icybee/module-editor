@@ -11,7 +11,6 @@
 
 namespace Icybee\Modules\Editor;
 
-use ICanBoogie\Modules\Thumbnailer\Thumbnail;
 use ICanBoogie\Operation;
 
 use Brickrouge\Element;
@@ -55,7 +54,7 @@ class RTEEditor implements Editor
 			{
 				global $core;
 
-				preg_match_all('#([\w\-]+)\s*=\s*\"([^"]+)#', $match[0], $attributes);
+				preg_match_all('#([\w\-]+)\s*=\s*\"([^"]+)"#', $match[0], $attributes);
 
 				$attributes = array_combine($attributes[1], $attributes[2]);
 				$attributes = array_map(function($v) { return html_entity_decode($v, ENT_COMPAT, \ICanBoogie\CHARSET); }, $attributes);
@@ -78,11 +77,9 @@ class RTEEditor implements Editor
 				{
 					$nid = $matches[1];
 
-					$options = $attributes;
+					unset($attributes['src']);
 
-					unset($options['src']);
-
-					$thumbnail = new Thumbnail($core->models['images'][$nid], $options);
+					$thumbnail = $core->models['images'][$nid]->thumbnail($attributes);
 
 					$attributes['src'] = $thumbnail->url;
 				}
