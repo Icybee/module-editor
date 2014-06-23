@@ -33,3 +33,14 @@ $(JS_UNCOMPRESSED): $(JS_FILES)
 
 $(JS_COMPRESSED): $(JS_UNCOMPRESSED)
 	$(JS_COMPRESSOR) > $@
+
+test: node_modules
+	@node_modules/mocha/bin/mocha tests/*.js
+
+node_modules:
+	npm install mocha chai mootools
+
+clean:
+	@rm -f .README.md.html
+	@rm -fR docs
+	@rm -fR node_modules
