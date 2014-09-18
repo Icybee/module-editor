@@ -11,8 +11,6 @@
 
 namespace Icybee\Modules\Editor;
 
-use ICanBoogie\Exception;
-
 /**
  * "Widgets" editor.
  */
@@ -73,7 +71,7 @@ class WidgetsEditor implements Editor
 
 		if ($undefined)
 		{
-			throw new Exception('Undefined widget(s): :list', array(':list' => implode(', ', array_keys($undefined))));
+			throw new \Exception(\ICanBoogie\format('Undefined widget(s): :list', array(':list' => implode(', ', array_keys($undefined)))));
 		}
 
 		$list = array_intersect_key($availables, $selected);
@@ -118,7 +116,7 @@ class WidgetsEditor implements Editor
 			}
 			else
 			{
-				throw new Exception('Unable to process file %file, unsupported type', array('%file' => $file));
+				throw new \Exception(\ICanBoogie\format('Unable to process file %file, unsupported type', array('%file' => $file)));
 			}
 		}
 		else if (isset($widget['module']) && isset($widget['block']))
@@ -127,7 +125,7 @@ class WidgetsEditor implements Editor
 		}
 		else
 		{
-			throw new Exception('Unable to render widget %widget, its description is invalid.', array('%widget' => $id));
+			throw new \Exception(\ICanBoogie\format('Unable to render widget %widget, its description is invalid.', array('%widget' => $id)));
 		}
 	}
 }

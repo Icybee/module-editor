@@ -12,7 +12,6 @@
 namespace Icybee\Modules\Editor;
 
 use ICanBoogie\Errors;
-use ICanBoogie\Exception;
 use ICanBoogie\Operation;
 
 /**
