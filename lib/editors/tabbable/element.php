@@ -41,7 +41,7 @@ class TabbableEditorElement extends Element implements EditorElement
 		(
 			'div', $attributes + array
 			(
-				Element::WIDGET_CONSTRUCTOR => 'TabbableEditor',
+				Element::IS => 'TabbableEditor',
 
 				'class' => 'editor editor--tabbable'
 			)
