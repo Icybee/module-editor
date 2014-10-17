@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Editor;
 
-use ICanBoogie\Module;
+use ICanBoogie\Module\Descriptor;
 
 use Brickrouge\Element;
 use Brickrouge\Text;
@@ -37,7 +37,7 @@ class FeedEditorElement extends Element implements EditorElement
 				continue;
 			}
 
-			$constructors[$module_id] = $descriptor[Module::T_TITLE];
+			$constructors[$module_id] = $descriptor[Descriptor::TITLE];
 		}
 
 		uasort($constructors, 'ICanBoogie\unaccent_compare_ci');

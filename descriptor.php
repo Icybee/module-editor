@@ -2,15 +2,15 @@
 
 namespace Icybee\Modules\Editor;
 
-use ICanBoogie\Module;
+use ICanBoogie\Module\Descriptor;
 
 return array
 (
-	Module::T_CATEGORY => 'features',
-	Module::T_DESCRIPTION => "Provides an API to manage and use editors.",
-	Module::T_PERMISSION => false,
-	Module::T_REQUIRED => true,
-	Module::T_NAMESPACE => __NAMESPACE__,
-	Module::T_TITLE => 'Editor API',
-	Module::T_VERSION => '1.0'
+	Descriptor::CATEGORY => 'features',
+	Descriptor::DESCRIPTION => "Provides an API to manage and use editors.",
+	Descriptor::PERMISSION => false,
+	Descriptor::REQUIRED => true,
+	Descriptor::NS => __NAMESPACE__,
+	Descriptor::TITLE => 'Editor API',
+	Descriptor::VERSION => '1.0'
 );
