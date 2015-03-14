@@ -178,11 +178,9 @@ EOT;
 	 */
 	static public function create_pane(array $pane)
 	{
-		global $core;
-
 		$editor_id = $pane['editor_id'];
 		$name = $pane['name'];
-		$editor = $core->editors[$editor_id];
+		$editor = \ICanBoogie\app()->editors[$editor_id];
 		$value = null;
 
 		if (!empty($pane['content']))

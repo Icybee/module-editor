@@ -23,11 +23,9 @@ class SelectorElement extends Element
 {
 	public function __construct(array $attributes=array())
 	{
-		global $core;
-
 		$options = array();
 
-		foreach ($core->editors as $id => $editor)
+		foreach ($this->app->editors as $id => $editor)
 		{
 			$options[$id] = I18n\t($id, array(), array('scope' => 'editor_title'));
 		}

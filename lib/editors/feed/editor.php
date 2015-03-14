@@ -45,36 +45,12 @@ class FeedEditor implements Editor
 		return new FeedEditorElement($attributes);
 	}
 
-	/*
-	static public function to_content($value, $content_id, $page_id)
-	{
-		global $core;
-
-		$contents = parent::to_content($value, $content_id, $page_id);
-
-		if (!$contents)
-		{
-			return;
-		}
-
-		// TODO-20101130: there is no cleanup for that, if the content is deleted, the view's target won't be removed
-
-		$constructor = $contents['constructor'];
-		$view_target_key = 'views.targets.' . strtr($constructor, '.', '_') . '/feed';
-
-		$core->site->metas[$view_target_key] = $page_id;
-
-		return json_encode($contents);
-	}
-	*/
-
 	// http://tools.ietf.org/html/rfc4287
 
 	public function render($content)
 	{
-		global $core;
-
-		$page = $core->request->context->page;
+		$app = \ICanBoogie\app();
+		$page = $app->request->context->page;
 		$site = $page->site;
 		$options = $content;
 
@@ -87,15 +63,15 @@ class FeedEditor implements Editor
 			$options['settings']['is_with_author'];
 		}
 
-		$gmt_offset = $core->timezone;
+		$gmt_offset = $app->timezone;
 
-		$fdate = $core->locale->calendar->date_formatter;
+		$fdate = $app->locale->calendar->date_formatter;
 		$time_pattern = "y-MM-dd'T'HH:mm:ss";
 
 		$host = preg_replace('#^www\.#', '', $_SERVER['SERVER_NAME']);
 		$page_created_at = $fdate($page->created_at, 'y-MM-dd');
 
-		$entries = $core->models[$constructor]->filter_by_constructor($constructor)->visible->order('date DESC')->limit($limit)->all;
+		$entries = $app->models[$constructor]->filter_by_constructor($constructor)->visible->order('date DESC')->limit($limit)->all;
 
 		ob_start();
 

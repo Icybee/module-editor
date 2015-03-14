@@ -25,10 +25,8 @@ class FeedEditorElement extends Element implements EditorElement
 
 	public function __construct(array $attributes=array())
 	{
-		global $core;
-
 		$constructors = array();
-		$modules = $core->modules;
+		$modules = $this->app->modules;
 
 		foreach ($modules->descriptors as $module_id => $descriptor)
 		{

@@ -19,7 +19,7 @@ class WidgetsEditor implements Editor
 	/**
 	 * Returns a JSON string.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::serialize()
+	 * @inheritdoc
 	 */
 	public function serialize($content)
 	{
@@ -29,16 +29,17 @@ class WidgetsEditor implements Editor
 	/**
 	 * Returns unserialized JSON content.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::unserialize()
+	 * @inheritdoc
 	 */
 	public function unserialize($serialized_content)
 	{
 		return (array) json_decode($serialized_content);
 	}
+
 	/**
 	 * @return WidgetsEditorElement
 	 *
-	 * @see Icybee\Modules\Editor.Editor::from()
+	 * @inheritdoc
 	 */
 	public function from(array $attributes)
 	{
@@ -48,22 +49,20 @@ class WidgetsEditor implements Editor
 	/**
 	 * Renders selected widgets.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::render()
+	 * @inheritdoc
 	 */
 	public function render($content)
 	{
-		global $core;
-
 		if (!$content)
 		{
-			return;
+			return null;
 		}
 
-		$availables = $core->configs->synthesize('widgets', 'merge');
+		$availables = \ICanBoogie\app()->configs->synthesize('widgets', 'merge');
 
 		if (!$availables)
 		{
-			return;
+			return null;
 		}
 
 		$selected = array_flip($content);
@@ -78,7 +77,7 @@ class WidgetsEditor implements Editor
 
 		if (!$list)
 		{
-			return;
+			return null;
 		}
 
 		$html = '';
@@ -94,8 +93,6 @@ class WidgetsEditor implements Editor
 
 	private function render_widget($widget, $id)
 	{
-		global $core;
-
 		if (isset($widget['file']))
 		{
 			$file = $widget['file'];
@@ -121,7 +118,7 @@ class WidgetsEditor implements Editor
 		}
 		else if (isset($widget['module']) && isset($widget['block']))
 		{
-			return $core->modules[$widget['module']]->getBlock($widget['block']);
+			return \ICanBoogie\app()->modules[$widget['module']]->getBlock($widget['block']);
 		}
 		else
 		{

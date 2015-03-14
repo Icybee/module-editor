@@ -45,8 +45,6 @@ class TabbableNewPaneOperation extends \ICanBoogie\Operation
 	 */
 	protected function process()
 	{
-		global $core;
-
 		$request = $this->request;
 		$properties = array
 		(
@@ -66,7 +64,7 @@ class TabbableNewPaneOperation extends \ICanBoogie\Operation
 		$pane = (string) $pane;
 
 		$this->response['tab'] = $tab;
-		$this->response['assets'] = $core->document->assets;
+		$this->response['assets'] = $this->app->document->assets;
 
 		return $pane;
 	}

@@ -52,10 +52,8 @@ class MultiEditorElement extends Element
 
 	protected function get_editor()
 	{
-		global $core;
-
 		$editor_id = $this->editor_id;
-		$editor = $core->editors[$editor_id];
+		$editor = $this->app->editors[$editor_id];
 		$element = $editor->from
 		(
 			($this[self::EDITOR_TAGS] ?: array()) + array

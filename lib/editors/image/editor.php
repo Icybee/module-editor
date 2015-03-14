@@ -19,7 +19,7 @@ class ImageEditor implements Editor
 	/**
 	 * Returns content as is.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::serialize()
+	 * @inheritdoc
 	 */
 	public function serialize($content)
 	{
@@ -29,7 +29,7 @@ class ImageEditor implements Editor
 	/**
 	 * Returns serialized content as is.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::unserialize()
+	 * @inheritdoc
 	 */
 	public function unserialize($serialized_content)
 	{
@@ -38,7 +38,7 @@ class ImageEditor implements Editor
 	/**
 	 * @return ImageEditorElement
 	 *
-	 * @see Icybee\Modules\Editor.Editor::from()
+	 * @inheritdoc
 	 */
 	public function from(array $attributes)
 	{
@@ -50,12 +50,10 @@ class ImageEditor implements Editor
 	 *
 	 * @return Icybee\Modules\Images\Image
 	 *
-	 * @see Icybee\Modules\Editor.Editor::render()
+	 * @inheritdoc
 	 */
 	public function render($content)
 	{
-		global $core;
-
-		return $content ? $core->models['images'][$content] : null;
+		return $content ? \ICanBoogie\app()->models['images'][$content] : null;
 	}
 }

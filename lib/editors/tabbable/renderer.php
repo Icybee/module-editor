@@ -97,11 +97,9 @@ EOT;
 
 	protected function render_pane(array $pane)
 	{
-		global $core;
-
 		$editor_id = $pane['editor_id'];
 		$serialized_content = $pane['serialized_content'];
-		$editor = $core->editors[$editor_id];
+		$editor = \ICanBoogie\app()->editors[$editor_id];
 
 		return $editor->render($editor->unserialize($serialized_content));
 	}

@@ -44,9 +44,7 @@ class WidgetsEditorElement extends Element implements EditorElement
 
 	public function render_inner_html()
 	{
-		global $core;
-
-		$config = $core->configs->synthesize('widgets', 'merge');
+		$config = \ICanBoogie\app()->configs->synthesize('widgets', 'merge');
 
 		if (!$config)
 		{

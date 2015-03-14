@@ -45,15 +45,13 @@ class RTEEditorElement extends Element implements EditorElement
 	/**
 	 * Alters the dataset with the `base-url`, `actions` and `external-css` attributes.
 	 *
-	 * @see Brickrouge.Element::alter_dataset()
+	 * @inheritdoc
 	 */
 	public function alter_dataset(array $dataset)
 	{
-		global $core;
-
 		$dataset = parent::alter_dataset($dataset);
 
-		$document = $core->document;
+		$document = $this->app->document;
 
 		$css = $this[self::STYLESHEETS] ?: array();
 

@@ -19,16 +19,17 @@ class TabbableEditor implements Editor
 	/**
 	 * Serializes the content as a JSON string.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::serialize()
+	 * @inheritdoc
 	 */
 	public function serialize($content)
 	{
-		global $core;
-
 		$panes = array();
 
 		if ($content && is_array($content))
 		{
+			/* @var $editors Collection */
+			$editors = \ICanBoogie\app()->editors;
+
 			foreach ($content as $properties)
 			{
 				$editor_id = $properties['editor_id'];
@@ -37,7 +38,7 @@ class TabbableEditor implements Editor
 				(
 					'title' => $properties['title'],
 					'editor_id' => $editor_id,
-					'serialized_content' => $core->editors[$editor_id]->serialize($properties['content'])
+					'serialized_content' => $editors[$editor_id]->serialize($properties['content'])
 				);
 			}
 		}
@@ -50,7 +51,7 @@ class TabbableEditor implements Editor
 	 *
 	 * @return array
 	 *
-	 * @see Icybee\Modules\Editor.Editor::unserialize()
+	 * @inheritdoc
 	 */
 	public function unserialize($serialized_content)
 	{
@@ -65,7 +66,7 @@ class TabbableEditor implements Editor
 	/**
 	 * @return TabbableEditorElement
 	 *
-	 * @see Icybee\Modules\Editor.Editor::from()
+	 * @inheritdoc
 	 */
 	public function from(array $attributes)
 	{
@@ -77,7 +78,7 @@ class TabbableEditor implements Editor
 	/**
 	 * The content is rendered using a {@link TabbableEditorRenderer} instance.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::render()
+	 * @inheritdoc
 	 */
 	public function render($content)
 	{

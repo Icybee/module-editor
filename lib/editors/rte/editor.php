@@ -23,7 +23,7 @@ class RTEEditor implements Editor
 	/**
 	 * Returns the content as is.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::serialize()
+	 * @inheritdoc
 	 */
 	public function serialize($content)
 	{
@@ -33,7 +33,7 @@ class RTEEditor implements Editor
 	/**
 	 * Returns the serialized content as is.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::unserialize()
+	 * @inheritdoc
 	 */
 	public function unserialize($serialized_content)
 	{
@@ -44,7 +44,7 @@ class RTEEditor implements Editor
 	 * Replaces managed images with width or height attributes by thumbnails, and transform markup
 	 * when the original image can be displayed in a lightbox.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::render()
+	 * @inheritdoc
 	 */
 	public function render($content)
 	{
@@ -52,7 +52,7 @@ class RTEEditor implements Editor
 		(
 			'#<img\s+[^>]+>#', function($match)
 			{
-				global $core;
+				$app = \ICanBoogie\app();
 
 				preg_match_all('#([\w\-]+)\s*=\s*\"([^"]+)"#', $match[0], $attributes);
 
@@ -79,7 +79,7 @@ class RTEEditor implements Editor
 
 					unset($attributes['src']);
 
-					$thumbnail = $core->models['images'][$nid]->thumbnail($attributes);
+					$thumbnail = $app->models['images'][$nid]->thumbnail($attributes);
 
 					$attributes['src'] = $thumbnail->url;
 				}
@@ -89,7 +89,7 @@ class RTEEditor implements Editor
 				if (isset($attributes['data-lightbox']) && $nid)
 				{
 					$attributes['src'] = preg_replace('#\&amp;lightbox=true#', '', $attributes['src']);
-					$path = $core->models['images']->select('path')->filter_by_nid($nid)->rc;
+					$path = $app->models['images']->select('path')->filter_by_nid($nid)->rc;
 				}
 
 				unset($attributes['data-nid']);
@@ -112,7 +112,7 @@ class RTEEditor implements Editor
 	/**
 	 * @return RTEEditorElement
 	 *
-	 * @see Icybee\Modules\Editor.Editor::from()
+	 * @inheritdoc
 	 */
 	public function from(array $attributes)
 	{

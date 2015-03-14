@@ -252,11 +252,11 @@ collection which is attached to the _core_ object through a lazy getter:
 ```php
 <?php
 
-$core->editors;
+$app->editors;
 
-$editor = $core->editors['rte'];
+$editor = $app->editors['rte'];
 
-$editor_element = $core->editors['rte']->from(array(
+$editor_element = $app->editors['rte']->from(array(
 	Group::LABEL => "Body",
 	Element::REQUIRED => true
 ));
@@ -308,7 +308,7 @@ created with the `editors` config.
 
 use Icybee\Modules\Editor\Collection;
 
-$core->events->attach(function(Collection\AlterEvent $event, Collection $target) {
+$app->events->attach(function(Collection\AlterEvent $event, Collection $target) {
 
 	$target['rte'] = 'MyRTEEditor';
 

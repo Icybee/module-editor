@@ -53,8 +53,6 @@ class ChangeOperation extends Operation
 
 	protected function process()
 	{
-		global $core;
-
 		$request = $this->request;
 
 		$editor = (string) new MultiEditorElement
@@ -68,7 +66,7 @@ class ChangeOperation extends Operation
 			)
 		);
 
-		$this->response['assets'] = $core->document->assets;
+		$this->response['assets'] = $this->app->document->assets;
 
 		return $editor;
 	}

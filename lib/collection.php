@@ -24,13 +24,13 @@ class Collection implements \ArrayAccess, \IteratorAggregate
 	 * The collection is created from the `editors` config and can be altered with an event hook
 	 * on the `Icybee\Modules\Editor\Collection::alter` event.
 	 *
-	 * @param \ICanBoogie\Core $core
+	 * @param \ICanBoogie\Core $app
 	 *
 	 * @return \Icybee\Modules\Editor\Collection
 	 */
-	static public function prototype_get_editors(\ICanBoogie\Core $core)
+	static public function prototype_get_editors(\ICanBoogie\Core $app)
 	{
-		$definitions = (array) $core->configs->synthesize('editors', 'merge');
+		$definitions = (array) $app->configs->synthesize('editors', 'merge');
 		$collection = new static($definitions);
 
 		new Collection\AlterEvent($collection);
