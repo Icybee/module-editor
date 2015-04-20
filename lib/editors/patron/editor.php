@@ -19,7 +19,7 @@ class PatronEditor implements Editor
 	/**
 	 * Returns content as is.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::serialize()
+	 * @inheritdoc
 	 */
 	public function serialize($content)
 	{
@@ -29,7 +29,7 @@ class PatronEditor implements Editor
 	/**
 	 * Returns serialized content as is.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::unserialize()
+	 * @inheritdoc
 	 */
 	public function unserialize($serialized_content)
 	{
@@ -39,7 +39,7 @@ class PatronEditor implements Editor
 	/**
 	 * @return RawEditorElement
 	 *
-	 * @see Icybee\Modules\Editor.Editor::from()
+	 * @inheritdoc
 	 */
 	public function from(array $attributes)
 	{
@@ -49,11 +49,11 @@ class PatronEditor implements Editor
 	/**
 	 * Returns content as is.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::render()
+	 * @inheritdoc
 	 */
 	public function render($content)
 	{
-		$patron = new \Patron\Engine();
+		$patron = \Patron\get_patron();
 
 		return $patron($content);
 	}

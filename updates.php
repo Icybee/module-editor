@@ -51,6 +51,43 @@ class Update20120101 extends Update
 
 		$model('UPDATE {self} SET editor = "rte" WHERE editor = "moo"');
 	}
+
+	/**
+	 * Replace editor `adjustnode` with editor `node` in contents.
+	 */
+	public function update_editor_adjustnode_in_contents()
+	{
+		$model = $this->app->models['contents'];
+		$count = $model->filter_by_editor('adjustnode')->count;
+
+		if (!$count)
+		{
+			throw new AssertionFailed(__FUNCTION__, [ 'adjustnode' ]);
+		}
+
+		$model('UPDATE {self} SET editor = "node" WHERE editor = "adjustnode"');
+	}
+
+	/**
+	 * Replace editor `adjustnode` with editor `node` in page contents.
+	 */
+	public function update_editor_adjustnode_in_page_contents()
+	{
+		$model = $this->app->models['pages/contents'];
+		$count = $model->filter_by_editor('adjustnode')->count;
+
+		if (!$count)
+		{
+			throw new AssertionFailed(__FUNCTION__, [ 'adjustnode' ]);
+		}
+
+		$model('UPDATE {self} SET editor = "node" WHERE editor = "adjustnode"');
+	}
+
+	public function update_editor_adjustnode_data()
+	{
+
+	}
 }
 
 /**
