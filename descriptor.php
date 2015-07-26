@@ -11,6 +11,5 @@ return array
 	Descriptor::PERMISSION => false,
 	Descriptor::REQUIRED => true,
 	Descriptor::NS => __NAMESPACE__,
-	Descriptor::TITLE => 'Editor API',
-	Descriptor::VERSION => '1.0'
+	Descriptor::TITLE => "Editor API"
 );
