@@ -11,7 +11,8 @@
 
 namespace Icybee\Modules\Editor;
 
-use ICanBoogie\PropertyNotDefined;
+use ICanBoogie\Accessor\AccessorTrait;
+use ICanBoogie\OffsetNotDefined;
 
 /**
  * Editor collection.
@@ -143,25 +144,22 @@ class Collection implements \ArrayAccess, \IteratorAggregate
  *
  * @property-read string $editor_id The identifier of the editor.
  */
-class EditorNotDefined extends \ICanBoogie\OffsetNotDefined
+class EditorNotDefined extends OffsetNotDefined
 {
+	use AccessorTrait;
+
 	private $editor_id;
 
-	public function __construct($editor_id, $code=500, \Exception $previous=null)
+	protected function get_editor_id()
+	{
+		return $this->editor_id;
+	}
+
+	public function __construct($editor_id, $code = 500, \Exception $previous = null)
 	{
 		$this->editor_id = $editor_id;
 
 		parent::__construct("Editor not defined: $editor_id.", $code, $previous);
-	}
-
-	public function __get($property)
-	{
-		if ($property == 'editor_id')
-		{
-			return $this->editor_id;
-		}
-
-		throw PropertyNotDefined(array($property, $this));
 	}
 }
 
@@ -174,21 +172,16 @@ class EditorAlreadyInstantiated extends \RuntimeException
 {
 	private $editor_id;
 
-	public function __construct($editor_id, $code=500, \Exception $previous=null)
+	protected function get_editor_id()
+	{
+		return $this->editor_id;
+	}
+
+	public function __construct($editor_id, $code = 500, \Exception $previous = null)
 	{
 		$this->editor_id = $editor_id;
 
 		parent::__construct("An editor has already been instantiated: $editor_id.", $code, $previous);
-	}
-
-	public function __get($property)
-	{
-		if ($property == 'editor_id')
-		{
-			return $this->editor_id;
-		}
-
-		throw PropertyNotDefined(array($property, $this));
 	}
 }
 
