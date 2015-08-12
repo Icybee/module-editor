@@ -12,6 +12,7 @@
 namespace Icybee\Modules\Editor;
 
 use ICanBoogie\Accessor\AccessorTrait;
+use ICanBoogie\Core;
 use ICanBoogie\OffsetNotDefined;
 
 /**
@@ -25,11 +26,11 @@ class Collection implements \ArrayAccess, \IteratorAggregate
 	 * The collection is created from the `editors` config and can be altered with an event hook
 	 * on the `Icybee\Modules\Editor\Collection::alter` event.
 	 *
-	 * @param \ICanBoogie\Core $app
+	 * @param Core $app
 	 *
 	 * @return \Icybee\Modules\Editor\Collection
 	 */
-	static public function prototype_get_editors(\ICanBoogie\Core $app)
+	static public function prototype_get_editors(Core $app)
 	{
 		$definitions = (array) $app->configs->synthesize('editors', 'merge');
 		$collection = new static($definitions);
@@ -44,14 +45,18 @@ class Collection implements \ArrayAccess, \IteratorAggregate
 
 	/**
 	 * Creates the collection.
+	 *
+	 * @param array $definitions
 	 */
-	public function __construct(array $definitions=array())
+	public function __construct(array $definitions = [])
 	{
 		$this->definitions = $definitions;
 	}
 
 	/**
 	 * Checks if a editor exists.
+	 *
+	 * @inheritdoc
 	 */
 	public function offsetExists($offset)
 	{
@@ -71,6 +76,8 @@ class Collection implements \ArrayAccess, \IteratorAggregate
 	 * Returns the definition of an editor.
 	 *
 	 * @throws EditorNotDefined in attempt to use an undefined editor.
+	 *
+	 * @inheritdoc
 	 */
 	public function offsetGet($offset)
 	{
@@ -102,8 +109,10 @@ class Collection implements \ArrayAccess, \IteratorAggregate
 	/**
 	 * Sets the editor definition.
 	 *
-	 * @throws EditorAlreadyInstantiated if an editor has already been instanciated with a previous
+	 * @throws EditorAlreadyInstantiated if an editor has already been instantiated with a previous
 	 * definition.
+	 *
+	 * @inheritdoc
 	 */
 	public function offsetSet($id, $value)
 	{
@@ -118,7 +127,9 @@ class Collection implements \ArrayAccess, \IteratorAggregate
 	/**
 	 * Removes an editor definition.
 	 *
-	 * @throws EditorAlreadyInstantiated if an editor has already been instanciated the definition.
+	 * @throws EditorAlreadyInstantiated if an editor has already been instantiated the definition.
+	 *
+	 * @inheritdoc
 	 */
 	public function offsetUnset($id)
 	{
@@ -132,6 +143,8 @@ class Collection implements \ArrayAccess, \IteratorAggregate
 
 	/**
 	 * Returns an iterator for the editor definitions.
+	 *
+	 * @inheritdoc
 	 */
 	public function getIterator()
 	{
@@ -187,17 +200,20 @@ class EditorAlreadyInstantiated extends \RuntimeException
 
 namespace Icybee\Modules\Editor\Collection;
 
+use ICanBoogie\Event;
+use Icybee\Modules\Editor\Collection;
+
 /**
  * Event class for the `Icybee\Modules\Editor\Collection::alter` event.
  */
-class AlterEvent extends \ICanBoogie\Event
+class AlterEvent extends Event
 {
 	/**
 	 * The event is constructed with the type `alter`.
 	 *
-	 * @param \Icybee\Modules\Editor\Collection $target
+	 * @param Collection $target
 	 */
-	public function __construct(\Icybee\Modules\Editor\Collection $target)
+	public function __construct(Collection $target)
 	{
 		parent::__construct($target, 'alter');
 	}

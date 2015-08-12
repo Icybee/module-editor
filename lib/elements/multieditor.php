@@ -39,33 +39,28 @@ class MultiEditorElement extends Element
 	{
 		$this->editor_id = $editor ? $editor : 'rte';
 
-		parent::__construct
-		(
-			'div', $attributes + array
-			(
-				self::SELECTOR_NAME => 'editor',
+		parent::__construct('div', $attributes + [
 
-				'class' => 'editor-wrapper'
-			)
-		);
+			self::SELECTOR_NAME => 'editor',
+
+			'class' => 'editor-wrapper'
+
+		]);
 	}
 
 	protected function get_editor()
 	{
 		$editor_id = $this->editor_id;
 		$editor = $this->app->editors[$editor_id];
-		$element = $editor->from
-		(
-			($this[self::EDITOR_TAGS] ?: array()) + array
-			(
-				Element::REQUIRED => $this[self::REQUIRED],
-				Element::DEFAULT_VALUE => $this[self::DEFAULT_VALUE],
+		$element = $editor->from(($this[self::EDITOR_TAGS] ?: []) + [
 
-				'name' => $this['name'],
-// 				'value' => $editor->unserialize($this['value'])
-				'value' => $this['value']
-			)
-		);
+			Element::REQUIRED => $this[self::REQUIRED],
+			Element::DEFAULT_VALUE => $this[self::DEFAULT_VALUE],
+
+			'name' => $this['name'],
+			'value' => $this['value']
+
+		]);
 
 		if ($element->type == 'textarea')
 		{
@@ -83,7 +78,7 @@ class MultiEditorElement extends Element
 	/**
 	 * Adds the `contents-name` and `selector-name` properties.
 	 *
-	 * @see Brickrouge.Element::alter_dataset()
+	 * @inheritdoc
 	 */
 	protected function alter_dataset(array $dataset)
 	{
@@ -100,7 +95,7 @@ class MultiEditorElement extends Element
 	 *
 	 * If the editor is not swappable an hidden element is used instead of the selector element.
 	 *
-	 * @see Brickrouge.Element::render_inner_html()
+	 * @inheritdoc
 	 */
 	protected function render_inner_html()
 	{
@@ -109,29 +104,25 @@ class MultiEditorElement extends Element
 
 		if ($this[self::NOT_SWAPPABLE])
 		{
-			$html .= new Element
-			(
-				'hidden', array
-				(
-					'name' => $this[self::SELECTOR_NAME],
-					'value' => $editor_id
-				)
-			);
+			$html .= new Element('hidden', [
+
+				'name' => $this[self::SELECTOR_NAME],
+				'value' => $editor_id
+
+			]);
 		}
 		else
 		{
-			$options = (string) new SelectorElement
-			(
-				array
-				(
-					Element::LABEL => 'Editor',
-					Element::LABEL_POSITION => 'before',
+			$options = (string) new SelectorElement([
 
-					'name' => $this[self::SELECTOR_NAME],
-					'class' => 'editor-selector',
-					'value' => $editor_id
-				)
-			);
+				Element::LABEL => 'Editor',
+				Element::LABEL_POSITION => 'before',
+
+				'name' => $this[self::SELECTOR_NAME],
+				'class' => 'editor-selector',
+				'value' => $editor_id
+
+			]);
 
 			if ($options)
 			{

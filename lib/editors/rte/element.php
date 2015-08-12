@@ -29,17 +29,15 @@ class RTEEditorElement extends Element implements EditorElement
 		$document->js->add('assets/editor.js');
 	}
 
-	public function __construct(array $attributes=array())
+	public function __construct(array $attributes = [])
 	{
-		parent::__construct
-		(
-			'textarea', $attributes + array
-			(
-				'class' => 'editor moo',
+		parent::__construct('textarea', $attributes + [
 
-				'rows' => 16
-			)
-		);
+			'class' => 'editor moo',
+
+			'rows' => 16
+
+		]);
 	}
 
 	/**
@@ -53,7 +51,7 @@ class RTEEditorElement extends Element implements EditorElement
 
 		$document = $this->app->document;
 
-		$css = $this[self::STYLESHEETS] ?: array();
+		$css = $this[self::STYLESHEETS] ?: [];
 
 		$css[] = Document::resolve_url(\Brickrouge\ASSETS . 'brickrouge.css');
 

@@ -2,17 +2,17 @@
 
 namespace Icybee\Modules\Editor;
 
-return array
-(
-	'rte' => __NAMESPACE__ . '\RTEEditor',
-	'textmark' => __NAMESPACE__ . '\TextmarkEditor',
-	'raw' => __NAMESPACE__ . '\RawEditor',
-	'text' => __NAMESPACE__ . '\TextEditor',
-	'patron' => __NAMESPACE__ . '\PatronEditor',
-	'php' => __NAMESPACE__ . '\PHPEditor',
-	'image' => __NAMESPACE__ . '\ImageEditor',
-	'node' => __NAMESPACE__ . '\NodeEditor',
-	'widgets' => __NAMESPACE__ . '\WidgetsEditor',
-	'feed' => __NAMESPACE__ . '\FeedEditor',
-	'tabbable' => __NAMESPACE__ . '\TabbableEditor'
-);
+return [
+
+	'rte' => RTEEditor::class,
+	'textmark' => TextmarkEditor::class,
+	'raw' => RawEditor::class,
+	'text' => TextEditor::class,
+	'patron' => PatronEditor::class,
+	'php' => PHPEditor::class,
+	'image' => ImageEditor::class,
+	'node' => NodeEditor::class,
+	'widgets' => WidgetsEditor::class,
+	'tabbable' => TabbableEditor::class
+
+];

@@ -21,7 +21,7 @@ class NodeEditor implements Editor
 	/**
 	 * Returns content as is.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::serialize()
+	 * @inheritdoc
 	 */
 	public function serialize($content)
 	{
@@ -31,7 +31,7 @@ class NodeEditor implements Editor
 	/**
 	 * Returns serialized content as is.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::unserialize()
+	 * @inheritdoc
 	 */
 	public function unserialize($serialized_content)
 	{
@@ -40,7 +40,7 @@ class NodeEditor implements Editor
 	/**
 	 * @return RawEditorElement
 	 *
-	 * @see Icybee\Modules\Editor.Editor::from()
+	 * @inheritdoc
 	 */
 	public function from(array $attributes)
 	{
@@ -50,10 +50,10 @@ class NodeEditor implements Editor
 	/**
 	 * Returns content as is.
 	 *
-	 * @see Icybee\Modules\Editor.Editor::render()
+	 * @inheritdoc
 	 */
 	public function render($content)
 	{
-		return $content ? Core::get()->models['nodes'][$content] : null;
+		return $content ? \ICanBoogie\app()->models['nodes'][$content] : null;
 	}
 }

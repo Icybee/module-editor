@@ -11,23 +11,25 @@
 
 namespace Icybee\Modules\Editor;
 
+use ICanBoogie\Errors;
 use ICanBoogie\I18n;
+use ICanBoogie\Operation;
 
 /**
  * Returns a new pane for the {@link TabbableEditor}.
  */
-class TabbableNewPaneOperation extends \ICanBoogie\Operation
+class TabbableNewPaneOperation extends Operation
 {
 	/**
 	 * The `control_name` parameter is request.
 	 *
-	 * @see ICanBoogie.Operation::validate()
+	 * @inheritdoc
 	 */
-	protected function validate(\ICanBoogie\Errors $errors)
+	protected function validate(Errors $errors)
 	{
 		if (!$this->request['control_name'])
 		{
-			$errors['control_name'] = I18n\t('The %identifier is required.', array('identifier' => 'control_name'));
+			$errors['control_name'] = $errors->format('The %identifier is required.', [ 'identifier' => 'control_name' ]);
 		}
 
 		return true;
@@ -41,18 +43,19 @@ class TabbableNewPaneOperation extends \ICanBoogie\Operation
 	 * - (string) tab: The tab element associated with the pane.
 	 * - (array) assets: The assets required by the elements.
 	 *
-	 * @see ICanBoogie.Operation::process()
+	 * @inheritdoc
 	 */
 	protected function process()
 	{
 		$request = $this->request;
-		$properties = array
-		(
+		$properties = [
+
 			'name' => $request['control_name'] . '[' . uniqid() . ']',
 			'title' => 'New tab',
 			'editor_id' => 'rte',
 			'serialized_content' => null
-		);
+
+		];
 
 		$tab = TabbableEditorElement::create_tab($properties);
 		$pane = TabbableEditorElement::create_pane($properties);

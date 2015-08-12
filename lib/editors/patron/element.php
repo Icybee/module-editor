@@ -26,14 +26,12 @@ class PatronEditorElement extends Element implements EditorElement
 		$document->css->add('assets/editor.css');
 	}
 
-	public function __construct(array $attributes=array())
+	public function __construct(array $attributes = [])
 	{
-		parent::__construct
-		(
-			'textarea', $attributes + array
-			(
-				'class' => 'editor patron'
-			)
-		);
+		parent::__construct('textarea', $attributes + [
+
+			'class' => 'editor patron'
+
+		]);
 	}
 }

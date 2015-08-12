@@ -18,14 +18,12 @@ use Brickrouge\Element;
  */
 class TextmarkEditorElement extends Element implements EditorElement
 {
-	public function __construct(array $attributes=array())
+	public function __construct(array $attributes = [])
 	{
-		parent::__construct
-		(
-			'textarea', $attributes + array
-			(
-				'class' => 'editor textmark'
-			)
-		);
+		parent::__construct('textarea', $attributes + [
+
+			'class' => 'editor textmark'
+
+		]);
 	}
 }

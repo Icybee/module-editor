@@ -133,9 +133,9 @@ if ($image)
 
 
 
-### UI element
+### GUI element
 
-Each editor provides a UI element that is used to edit the supported content type. The element
+Each editor provides a GUI element that is used to edit the supported content type. The element
 is created using the `from()` method. For instance, `TextEditor` creates instances of
 `TextEditorElement`:
 
@@ -162,21 +162,19 @@ namespace ICanBoogie\Modules\Editor;
 
 class TextEditorElement extends \Brickrouge\Text implements EditorElement
 {
-    public function __construct(array $attributes=array())
+    public function __construct(array $attributes = [])
     {
-        parent::__construct
-        (
-            $attributes + array
-            (
-                'class' => 'editor editor--raw'
-            )
-        );
+        parent::__construct($attributes + [
+        
+            'class' => 'editor editor--raw'
+            
+        ]);
     }
 }
 ```
 
 The UI element must be instances of the [Element](http://brickrouge.org/docs/class-Brickrouge.Element.html)
-class, or one of its subclasses. For instance, `TextEditorElement` extends [Text]([Element](http://brickrouge.org/docs/class-Brickrouge.Text.html)
+class, or one of its subclasses. For instance, `TextEditorElement` extends [Text][]
 which extends [Element](http://brickrouge.org/docs/class-Brickrouge.Element.html). The many
 attributes of the [Element](http://brickrouge.org/docs/class-Brickrouge.Element.html) class
 can be used to obtain a satisfactory element:
@@ -188,17 +186,18 @@ use Brickrouge\Element;
 use Brickrouge\Group;
 
 $editor = new TextEditor;
-$element = $editor->from(array
-(
+$element = $editor->from([
+
     Group::LABEL => 'Title',
     Element::REQUIRED => true,
     
     'name' => 'title',
     'value' => $editor->unserialize($serialized_content)
-));
+    
+]);
 ```
 
-Note that the content is specified to the UI element using the `value` attribute.
+Note that the content is specified to the GUI element using the `value` attribute.
 
 
 
@@ -207,7 +206,7 @@ Note that the content is specified to the UI element using the `value` attribute
 ## Editor collection
 
 An editor collection contains the definition of the available editors. It is used to instantiate
-editors, and by extension their UI element:
+editors, and by extension their GUI element:
 
 ```php
 <?php
@@ -217,22 +216,22 @@ namespace Icybee\Modules\Editor;
 use Brickrouge\Group;
 use Brickrouge\Element;
 
-$editors = new Collection
-(
-	array
-	(
-		'rte' => __NAMESPACE__ . '\RTEEditor',
-		'textmark' => __NAMESPACE__ . '\TextmarkEditor',
-		'raw' => __NAMESPACE__ . '\RawEditor',
-	)
-);
+$editors = new Collection([
+	
+	'rte' => RTEEditor::class,
+	'textmark' => TextmarkEditor::class,
+	'raw' => RawEditor::class,
+
+]);
 
 $editor = $editors['rte'];
 
-$editor_element = $editors['rte']->from(array(
+$editor_element = $editors['rte']->from([
+
 	Group::LABEL => "Body",
 	Element::REQUIRED => true
-));
+
+]);
 ```
 
 An editor definition can be modified until it has been used to instantiate an editor. A
@@ -256,10 +255,10 @@ $app->editors;
 
 $editor = $app->editors['rte'];
 
-$editor_element = $app->editors['rte']->from(array(
+$editor_element = $app->editors['rte']->from([
 	Group::LABEL => "Body",
 	Element::REQUIRED => true
-));
+]);
 ```
 
 This collection is created from the `editors` config and can be altered by attaching an event hook
@@ -279,19 +278,20 @@ define editors this way, unless you don't want an editor to be available to the 
 
 namespace Icybee\Modules\Editor;
 
-return array
-(
-	'rte' => __NAMESPACE__ . '\RTEEditor',
-	'textmark' => __NAMESPACE__ . '\TextmarkEditor',
-	'raw' => __NAMESPACE__ . '\RawEditor',
-	'text' => __NAMESPACE__ . '\TextEditor',
-	'patron' => __NAMESPACE__ . '\PatronEditor',
-	'php' => __NAMESPACE__ . '\PHPEditor',
-	'image' => __NAMESPACE__ . '\ImageEditor',
-	'node' => __NAMESPACE__ . '\NodeEditor',
-	'widgets' => __NAMESPACE__ . '\WidgetsEditor',
-	'tabbable' => __NAMESPACE__ . '\TabbableEditor'
-);
+return [
+
+	'rte' => RTEEditor::class,
+	'textmark' => TextmarkEditor::class,
+	'raw' => RawEditor::class,
+	'text' => TextEditor::class,
+	'patron' => PatronEditor::class,
+	'php' => PHPEditor::class,
+	'image' => ImageEditor::class,
+	'node' => NodeEditor::class,
+	'widgets' => WidgetsEditor::class,
+	'tabbable' => TabbableEditor::class
+
+];
 ```
 
 
@@ -344,17 +344,15 @@ class EditBlock extends \Icybee\Modules\Nodes\EditBlock
 	{
 		// …
 		
-		Content::BODY => new MultiEditorElement
-		(
-			$values['editor'] ? $values['editor'] : $default_editor, array
-			(
-				Element::LABEL_MISSING => 'Contents',
-				Element::GROUP => 'contents',
-				Element::REQUIRED => true,
+		Content::BODY => new MultiEditorElement($values['editor'] ? $values['editor'] : $default_editor, [
+			
+			Element::LABEL_MISSING => 'Contents',
+			Element::GROUP => 'contents',
+			Element::REQUIRED => true,
 
-				'rows' => 16
-			)
-		)
+			'rows' => 16
+			
+		])
 		
 		// …
 	}
@@ -374,7 +372,7 @@ user. Its name can be specified using the `SELECTOR_NAME` attribute, it defaults
 
 ## Requirement
 
-The package requires PHP 5.3 or later.
+The package requires PHP 5.5 or later.
 
 
 
@@ -385,17 +383,11 @@ The package requires PHP 5.3 or later.
 The recommended way to install this package is through [Composer](http://getcomposer.org/).
 Create a `composer.json` file and run `php composer.phar install` command to install it:
 
-```json
-{
-	"minimum-stability": "dev",
-	"require":
-	{
-		"icybee/module-editor": "*"
-	}
-}
+```
+$ composer require icybee/module-editor
 ```
 
-Note: This module is part of the modules required by [Icybee](http://icybee.org).
+**Note:** This module is part of the modules required by [Icybee](http://icybee.org).
 
 
 
@@ -441,3 +433,9 @@ cleaned with the `make clean` command.
 ## License
 
 The module is licensed under the New BSD License - See the LICENSE file for details.
+
+
+
+
+
+[Text]: http://brickrouge.org/docs/class-Brickrouge.Text.html

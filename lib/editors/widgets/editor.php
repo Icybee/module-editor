@@ -70,7 +70,7 @@ class WidgetsEditor implements Editor
 
 		if ($undefined)
 		{
-			throw new \Exception(\ICanBoogie\format('Undefined widget(s): :list', array(':list' => implode(', ', array_keys($undefined)))));
+			throw new \Exception(\ICanBoogie\format('Undefined widget(s): :list', [ ':list' => implode(', ', array_keys($undefined)) ]));
 		}
 
 		$list = array_intersect_key($availables, $selected);
@@ -109,7 +109,7 @@ class WidgetsEditor implements Editor
 			{
 				$patron = new \Patron\Engine;
 
-				return $patron(file_get_contents($file), null, array('file' => $file));
+				return $patron(file_get_contents($file), null, [ 'file' => $file ]);
 			}
 			else
 			{

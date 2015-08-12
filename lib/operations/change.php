@@ -21,12 +21,11 @@ class ChangeOperation extends Operation
 {
 	protected function get_controls()
 	{
-		return array
-		(
-			self::CONTROL_AUTHENTICATION => true
-		)
+		return [
 
-		+ parent::get_controls();
+			self::CONTROL_AUTHENTICATION => true
+
+		] + parent::get_controls();
 	}
 
 	protected function validate(Errors $errors)
@@ -35,17 +34,17 @@ class ChangeOperation extends Operation
 
 		if (!$this->key)
 		{
-			$errors['editor_id'] = $errors->format('The %property is required.', array('property' => 'editor_id'));
+			$errors['editor_id'] = $errors->format('The %property is required.', [ 'property' => 'editor_id' ]);
 		}
 
 		if (empty($request['selector_name']))
 		{
-			$errors['selector_name'] = $errors->format('The %property is required.', array('property' => 'selector_name'));
+			$errors['selector_name'] = $errors->format('The %property is required.', [ 'property' => 'selector_name' ]);
 		}
 
 		if (empty($request['contents_name']))
 		{
-			$errors['contents_name'] = $errors->format('The %property is required.', array('property' => 'contents_name'));
+			$errors['contents_name'] = $errors->format('The %property is required.', [ 'property' => 'contents_name' ]);
 		}
 
 		return !$errors->count();
@@ -55,16 +54,14 @@ class ChangeOperation extends Operation
 	{
 		$request = $this->request;
 
-		$editor = (string) new MultiEditorElement
-		(
-			$this->key, array
-			(
-				MultiEditorElement::SELECTOR_NAME => $request['selector_name'],
+		$editor = (string) new MultiEditorElement($this->key, [
 
-				'name' => $request['contents_name'],
-				'value' => $request['contents']
-			)
-		);
+			MultiEditorElement::SELECTOR_NAME => $request['selector_name'],
+
+			'name' => $request['contents_name'],
+			'value' => $request['contents']
+
+		]);
 
 		$this->response['assets'] = $this->app->document->assets;
 

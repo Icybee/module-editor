@@ -21,28 +21,26 @@ use Brickrouge\ElementIsEmpty;
  */
 class SelectorElement extends Element
 {
-	public function __construct(array $attributes=array())
+	public function __construct(array $attributes = [])
 	{
 		$options = array();
 
 		foreach ($this->app->editors as $id => $editor)
 		{
-			$options[$id] = I18n\t($id, array(), array('scope' => 'editor_title'));
+			$options[$id] = $this->t($id, [], [ 'scope' => 'editor_title' ]);
 		}
 
-		parent::__construct
-		(
-			'select', $attributes + array
-			(
-				Element::OPTIONS => $options
-			)
-		);
+		parent::__construct('select', $attributes + [
+
+			Element::OPTIONS => $options
+
+		]);
 	}
 
 	/**
 	 * @throws ElementIsEmpty if the element has no options.
 	 *
-	 * @see Brickrouge.Element::render_outer_html()
+	 * @inheritdoc
 	 */
 	protected function render_outer_html()
 	{

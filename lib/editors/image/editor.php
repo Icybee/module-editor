@@ -48,7 +48,7 @@ class ImageEditor implements Editor
 	/**
 	 * Returns image active record.
 	 *
-	 * @return Icybee\Modules\Images\Image
+	 * @return \Icybee\Modules\Images\Image
 	 *
 	 * @inheritdoc
 	 */

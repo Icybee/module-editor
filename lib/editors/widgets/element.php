@@ -26,15 +26,13 @@ class WidgetsEditorElement extends Element implements EditorElement
 		$document->js->add('assets/editor.js');
 	}
 
-	public function __construct(array $attributes=array())
+	public function __construct(array $attributes = [])
 	{
-		parent::__construct
-		(
-			'ul', $attributes + array
-			(
-				'class' => 'widgets-selector combo'
-			)
-		);
+		parent::__construct('ul', $attributes + [
+
+			'class' => 'widgets-selector combo'
+
+		]);
 
 		if ($this[Element::DESCRIPTION] === null)
 		{
@@ -48,7 +46,7 @@ class WidgetsEditorElement extends Element implements EditorElement
 
 		if (!$config)
 		{
-			return new Alert('There is no widget defined.', array(Alert::CONTEXT => Alert::CONTEXT_INFO));
+			return new Alert('There is no widget defined.', [ Alert::CONTEXT => Alert::CONTEXT_INFO ]);
 		}
 
 		$rc = parent::render_inner_html();
@@ -56,7 +54,7 @@ class WidgetsEditorElement extends Element implements EditorElement
 		$value = $this['value'];
 		$name = $this['name'];
 
-		$value = is_array($value) ? array_flip($value) : array();
+		$value = is_array($value) ? array_flip($value) : [];
 
 		// TODO-20100204: check deprecated widgets ids
 
@@ -68,16 +66,14 @@ class WidgetsEditorElement extends Element implements EditorElement
 		{
 			$rc .= '<li>';
 
-			$rc .= new Element
-			(
-				Element::TYPE_CHECKBOX, array
-				(
-					Element::LABEL => $widget['title'],
+			$rc .= new Element(Element::TYPE_CHECKBOX, [
 
-					'name' => $name . '[' . $id . ']',
-					'checked' => isset($value[$id])
-				)
-			);
+				Element::LABEL => $widget['title'],
+
+				'name' => $name . '[' . $id . ']',
+				'checked' => isset($value[$id])
+
+			]);
 
 			$rc .= '</li>';
 		}

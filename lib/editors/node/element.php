@@ -13,12 +13,15 @@ namespace Icybee\Modules\Editor;
 
 use Brickrouge\Element;
 
+use Icybee\Modules\Nodes\PopNode;
+use Icybee\Modules\Images\PopImage;
+
 /**
  * "Node" editor element.
  */
 class NodeEditorElement extends Element implements EditorElement
 {
-	public function __construct(array $attributes=array())
+	public function __construct(array $attributes = [])
 	{
 		parent::__construct('div', $attributes);
 	}
@@ -35,24 +38,22 @@ class NodeEditorElement extends Element implements EditorElement
 			$value = json_decode($value);
 		}
 
-		$class = 'Icybee\Modules\Nodes\PopNode';
+		$class = PopNode::class;
 		$constructor = $this['data-constructor'] ?: 'nodes';
 
 		if ($constructor == 'images')
 		{
-			$class = 'Icybee\Modules\Images\PopImage';
+			$class = PopImage::class;
 		}
 
-		$rc .= (string) new $class
-		(
-			array
-			(
-				\Icybee\Modules\Nodes\PopNode::T_CONSTRUCTOR => $constructor,
+		$rc .= (string) new $class([
 
-				'name' => $name,
-				'value' => $value
-			)
-		);
+			PopNode::T_CONSTRUCTOR => $constructor,
+
+			'name' => $name,
+			'value' => $value
+
+		]);
 
 		return $rc;
 	}

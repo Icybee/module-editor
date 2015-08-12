@@ -14,7 +14,7 @@ namespace Icybee\Modules\Editor;
 class CollectionTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @expectedException Icybee\Modules\Editor\EditorNotDefined
+	 * @expectedException \Icybee\Modules\Editor\EditorNotDefined
 	 */
 	public function testEditorNotDefined()
 	{
@@ -36,7 +36,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException Icybee\Modules\Editor\EditorAlreadyInstantiated
+	 * @expectedException \Icybee\Modules\Editor\EditorAlreadyInstantiated
 	 */
 	public function testCannotModifyInstantiatedEditorDefinition()
 	{

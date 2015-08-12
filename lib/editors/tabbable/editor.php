@@ -34,12 +34,13 @@ class TabbableEditor implements Editor
 			{
 				$editor_id = $properties['editor_id'];
 
-				$panes[] = array
-				(
+				$panes[] = [
+
 					'title' => $properties['title'],
 					'editor_id' => $editor_id,
 					'serialized_content' => $editors[$editor_id]->serialize($properties['content'])
-				);
+
+				];
 			}
 		}
 

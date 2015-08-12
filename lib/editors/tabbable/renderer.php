@@ -67,7 +67,7 @@ EOT;
 
 	protected function render_tabbable_tab(array $pane, array $panes)
 	{
-		return new A($pane['title'], '#', array('data-toggle' => 'tab'));
+		return new A($pane['title'], '#', [ 'data-toggle' => 'tab' ]);
 	}
 
 	protected function render_content(array $panes)

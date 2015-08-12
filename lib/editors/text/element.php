@@ -18,14 +18,12 @@ use Brickrouge\Text;
  */
 class TextEditorElement extends Text implements EditorElement
 {
-	public function __construct(array $attributes=array())
+	public function __construct(array $attributes = [])
 	{
-		parent::__construct
-		(
-			$attributes + array
-			(
-				'class' => 'editor raw'
-			)
-		);
+		parent::__construct($attributes + [
+
+			'class' => 'editor raw'
+
+		]);
 	}
 }

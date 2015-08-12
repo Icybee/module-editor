@@ -35,45 +35,43 @@ class TabbableEditorElement extends Element implements EditorElement
 		$document->js->add('assets/editor.js');
 	}
 
-	public function __construct(array $attributes=array())
+	public function __construct(array $attributes = [])
 	{
-		parent::__construct
-		(
-			'div', $attributes + array
-			(
-				Element::IS => 'TabbableEditor',
+		parent::__construct('div', $attributes + [
 
-				'class' => 'editor editor--tabbable'
-			)
-		);
+			Element::IS => 'TabbableEditor',
+
+			'class' => 'editor editor--tabbable'
+
+		]);
 	}
 
 	/**
 	 * Adds the `control-name` property.
 	 *
-	 * @see Brickrouge.Element::alter_dataset()
+	 * @inheritdoc
 	 */
 	protected function alter_dataset(array $dataset)
 	{
-		return parent::alter_dataset(array_merge($dataset, array(
+		return parent::alter_dataset(array_merge($dataset, [
 
 			'control-name' => $this['name']
 
-		)));
+		]));
 	}
 
 	protected function render_inner_html()
 	{
 		$value = $this['value'];
-		$panes = $value ? array_values((array) $this['value']) : array
-		(
-			array
-			(
+		$panes = $value ? array_values((array) $this['value']) : [
+
+			[
 				'title' => 'New tab',
 				'editor_id' => 'rte',
 				'serialized_content' => null
-			)
-		);
+			]
+
+		];
 
 		foreach ($panes as $id => &$pane)
 		{
@@ -145,26 +143,20 @@ EOT;
 	 */
 	static public function create_tab(array $pane)
 	{
-		return new Element
-		(
-			'li', array
-			(
-				Element::CHILDREN => array
-				(
-					new Element
-					(
-						'a', array
-						(
-							Element::INNER_HTML => '<span class="title" data-recieves="title">' . $pane['title'] . '</span><span class="close" data-removes="tab">&times;</span>',
+		return new Element('li', [
 
-							'href' => '#',
-							'data-toggle' => 'tab',
-							'tabindex' => -1
-						)
-					)
-				)
-			)
-		);
+			Element::CHILDREN => [
+
+				new Element('a', [
+
+					Element::INNER_HTML => '<span class="title" data-recieves="title">' . $pane['title'] . '</span><span class="close" data-removes="tab">&times;</span>',
+
+					'href' => '#',
+					'data-toggle' => 'tab',
+					'tabindex' => -1
+				])
+			]
+		]);
 	}
 
 	/**
@@ -192,49 +184,40 @@ EOT;
 			$value = $editor->unserialize($pane['serialized_content']);
 		}
 
-		$content = new Group
-		(
-			array
-			(
-				Element::CHILDREN => array
-				(
-					'title' => new Text
-					(
-						array
-						(
-							Element::REQUIRED => true,
+		$content = new Group([
 
-							'name' => "{$name}[title]",
-							'value' => $pane['title'],
+			Element::CHILDREN => [
 
-							'data-provides' => 'title'
-						)
-					),
+				'title' => new Text([
 
-					'content' => new MultiEditorElement
-					(
-						$editor_id, array
-						(
-							MultiEditorElement::SELECTOR_NAME => "{$name}[editor_id]",
+					Element::REQUIRED => true,
 
-							'name' => "{$name}[content]",
-							'value' => $value,
+					'name' => "{$name}[title]",
+					'value' => $pane['title'],
 
-							'data-provides' => 'content'
-						)
-					)
-				)
-			)
-		);
+					'data-provides' => 'title'
 
-		return new Element
-		(
-			'div', array
-			(
-				Element::INNER_HTML => $content,
+				]),
 
-				'class' => 'tab-pane'
-			)
-		);
+				'content' => new MultiEditorElement($editor_id, [
+
+					MultiEditorElement::SELECTOR_NAME => "{$name}[editor_id]",
+
+					'name' => "{$name}[content]",
+					'value' => $value,
+
+					'data-provides' => 'content'
+
+				])
+			]
+		]);
+
+		return new Element('div', [
+
+			Element::INNER_HTML => $content,
+
+			'class' => 'tab-pane'
+
+		]);
 	}
 }
