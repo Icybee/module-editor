@@ -41,6 +41,10 @@ class Collection implements \ArrayAccess, \IteratorAggregate
 	}
 
 	protected $definitions;
+
+	/**
+	 * @var Editor[]
+	 */
 	protected $editors;
 
 	/**

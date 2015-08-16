@@ -13,12 +13,15 @@ namespace Icybee\Modules\Editor;
 
 use Brickrouge\Document;
 use Brickrouge\Element;
+use Icybee\Binding\ObjectBindings;
 
 /**
  * RTE editor element.
  */
 class RTEEditorElement extends Element implements EditorElement
 {
+	use ObjectBindings;
+
 	const ACTIONS = '#rteeditorelement-actions';
 
 	static protected function add_assets(Document $document)

@@ -13,12 +13,15 @@ namespace Icybee\Modules\Editor;
 
 use ICanBoogie\Errors;
 use ICanBoogie\Operation;
+use Icybee\Binding\ObjectBindings;
 
 /**
  * Changes multieditor editor.
  */
 class ChangeOperation extends Operation
 {
+	use ObjectBindings;
+
 	protected function get_controls()
 	{
 		return [
