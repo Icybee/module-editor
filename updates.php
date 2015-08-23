@@ -99,6 +99,8 @@ class Update20140619 extends Update
 	{
 		$model = $this->app->models['pages/contents'];
 
+		/* @var $contents \Icybee\Modules\Pages\Content[] */
+
 		$contents = $model
 		->filter_by_editor('rte')
 		->where('content LIKE "%/api/images/%/thumbnail?%"')
