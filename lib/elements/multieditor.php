@@ -33,8 +33,8 @@ class MultiEditorElement extends Element
 	{
 		parent::add_assets($document);
 
-		$document->css->add('assets/elements.css');
-		$document->js->add('assets/elements.js');
+		$document->css->add(__DIR__ . '/assets/elements.css');
+		$document->js->add(__DIR__ . '/assets/elements.js');
 	}
 
 	protected $editor_id;

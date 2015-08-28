@@ -28,8 +28,8 @@ class RTEEditorElement extends Element implements EditorElement
 	{
 		parent::add_assets($document);
 
-		$document->css->add('assets/editor.css');
-		$document->js->add('assets/editor.js');
+		$document->css->add(__DIR__ . '/assets/editor.css');
+		$document->js->add(__DIR__ . '/assets/editor.js');
 	}
 
 	public function __construct(array $attributes = [])
