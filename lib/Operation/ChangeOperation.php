@@ -9,11 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Editor;
+namespace Icybee\Modules\Editor\Operation;
 
 use ICanBoogie\Errors;
 use ICanBoogie\Operation;
+
 use Icybee\Binding\ObjectBindings;
+use Icybee\Modules\Editor\MultiEditorElement;
 
 /**
  * Changes multieditor editor.
