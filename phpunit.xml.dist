@@ -10,10 +10,16 @@
          stopOnFailure="false"
          syntaxCheck="false"
          bootstrap="./tests/bootstrap.php"
->
+        >
     <testsuites>
-        <testsuite name="Icybee/Modules/Nodes Test Suite">
+        <testsuite name="icybee/module-editor">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./lib</directory>
+        </whitelist>
+    </filter>
 </phpunit>
