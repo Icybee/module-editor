@@ -15,14 +15,14 @@ use ICanBoogie\I18n;
 
 use Brickrouge\Element;
 use Brickrouge\ElementIsEmpty;
-use Icybee\Binding\ObjectBindings;
+use Icybee\Binding\PrototypedBindings;
 
 /**
  * A selector for the available editors.
  */
 class SelectorElement extends Element
 {
-	use ObjectBindings;
+	use PrototypedBindings;
 
 	public function __construct(array $attributes = [])
 	{

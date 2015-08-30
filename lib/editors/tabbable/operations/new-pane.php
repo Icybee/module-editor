@@ -14,14 +14,14 @@ namespace Icybee\Modules\Editor;
 use ICanBoogie\Errors;
 use ICanBoogie\I18n;
 use ICanBoogie\Operation;
-use Icybee\Binding\ObjectBindings;
+use Icybee\Binding\PrototypedBindings;
 
 /**
  * Returns a new pane for the {@link TabbableEditor}.
  */
 class TabbableNewPaneOperation extends Operation
 {
-	use ObjectBindings;
+	use PrototypedBindings;
 
 	/**
 	 * The `control_name` parameter is request.

@@ -14,7 +14,7 @@ namespace Icybee\Modules\Editor\Operation;
 use ICanBoogie\Errors;
 use ICanBoogie\Operation;
 
-use Icybee\Binding\ObjectBindings;
+use Icybee\Binding\PrototypedBindings;
 use Icybee\Modules\Editor\MultiEditorElement;
 
 /**
@@ -22,7 +22,7 @@ use Icybee\Modules\Editor\MultiEditorElement;
  */
 class ChangeOperation extends Operation
 {
-	use ObjectBindings;
+	use PrototypedBindings;
 
 	protected function get_controls()
 	{

@@ -14,7 +14,7 @@ namespace Icybee\Modules\Editor;
 use Brickrouge\Document;
 use Brickrouge\Element;
 
-use Icybee\Binding\ObjectBindings;
+use Icybee\Binding\PrototypedBindings;
 
 /**
  * An element that can change its editor.
@@ -23,7 +23,7 @@ use Icybee\Binding\ObjectBindings;
  */
 class MultiEditorElement extends Element
 {
-	use ObjectBindings;
+	use PrototypedBindings;
 
 	const EDITOR_TAGS = '#meditor-tags';
 	const SELECTOR_NAME = '#meditor-selector-name';

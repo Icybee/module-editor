@@ -13,14 +13,14 @@ namespace Icybee\Modules\Editor;
 
 use Brickrouge\Document;
 use Brickrouge\Element;
-use Icybee\Binding\ObjectBindings;
+use Icybee\Binding\PrototypedBindings;
 
 /**
  * RTE editor element.
  */
 class RTEEditorElement extends Element implements EditorElement
 {
-	use ObjectBindings;
+	use PrototypedBindings;
 
 	const ACTIONS = '#rteeditorelement-actions';
 
