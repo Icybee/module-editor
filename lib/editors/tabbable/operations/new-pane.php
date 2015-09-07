@@ -32,7 +32,7 @@ class TabbableNewPaneOperation extends Operation
 	{
 		if (!$this->request['control_name'])
 		{
-			$errors['control_name'] = $errors->format('The %identifier is required.', [ 'identifier' => 'control_name' ]);
+			$errors->add('control_name', "The %identifier is required.", [ 'identifier' => 'control_name' ]);
 		}
 
 		return true;

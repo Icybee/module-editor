@@ -39,17 +39,17 @@ class ChangeOperation extends Operation
 
 		if (!$this->key)
 		{
-			$errors['editor_id'] = $errors->format('The %property is required.', [ 'property' => 'editor_id' ]);
+			$errors->add('editor_id', "The %property is required.", [ 'property' => 'editor_id' ]);
 		}
 
 		if (empty($request['selector_name']))
 		{
-			$errors['selector_name'] = $errors->format('The %property is required.', [ 'property' => 'selector_name' ]);
+			$errors->add('selector_name', "The %property is required.", [ 'property' => 'selector_name' ]);
 		}
 
 		if (empty($request['contents_name']))
 		{
-			$errors['contents_name'] = $errors->format('The %property is required.', [ 'property' => 'contents_name' ]);
+			$errors->add('contents_name', "The %property is required.", [ 'property' => 'contents_name' ]);
 		}
 
 		return !$errors->count();
