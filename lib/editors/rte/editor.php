@@ -48,65 +48,24 @@ class RTEEditor implements Editor
 	 */
 	public function render($content)
 	{
-		return preg_replace_callback
-		(
-			'#<img\s+[^>]+>#', function($match)
-			{
-				$app = \ICanBoogie\app();
+		if (strpos($content, '<img ') === false)
+		{
+			return $content;
+		}
 
-				preg_match_all('#([\w\-]+)\s*=\s*\"([^"]+)"#', $match[0], $attributes);
+		$app = \ICanBoogie\app();
 
-				$attributes = array_combine($attributes[1], $attributes[2]);
-				$attributes = array_map(function($v) { return html_entity_decode($v, ENT_COMPAT, \ICanBoogie\CHARSET); }, $attributes);
-				$attributes += array
-				(
-					'width' => null,
-					'height' => null,
-					'data-nid' => null
-				);
+		$transform_img = new TransformImg(function($id) use ($app) {
 
-				$w = $attributes['width'];
-				$h = $attributes['height'];
-				$nid = $attributes['data-nid'];
+			return $app->models['images'][$id];
 
-				if ($w && $h && $nid)
-				{
-					$attributes['src'] = Operation::encode('images/' . $nid . '/' . $w . 'x' . $h);
-				}
-				else if (($w || $h) && preg_match('#^/repository/files/image/(\d+)#', $attributes['src'], $matches))
-				{
-					$nid = $matches[1];
+		});
 
-					unset($attributes['src']);
+		return preg_replace_callback('#<img\s+[^>]+>#', function($match) use ($transform_img) {
 
-					$thumbnail = $app->models['images'][$nid]->thumbnail($attributes);
+			return $transform_img($match[0]);
 
-					$attributes['src'] = $thumbnail->url;
-				}
-
-				$path = null;
-
-				if (isset($attributes['data-lightbox']) && $nid)
-				{
-					$attributes['src'] = preg_replace('#\&amp;lightbox=true#', '', $attributes['src']);
-					$path = $app->models['images']->select('path')->filter_by_nid($nid)->rc;
-				}
-
-				unset($attributes['data-nid']);
-				unset($attributes['data-lightbox']);
-
-				$rc = (string) new Element('img', $attributes);
-
-				if ($path)
-				{
-					$rc = '<a href="' . \ICanBoogie\escape($path) . '" rel="lightbox[]">' . $rc . '</a>';
-				}
-
-				return $rc;
-			},
-
-			$content
-		);
+		}, $content);
 	}
 
 	/**
