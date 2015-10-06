@@ -15,10 +15,13 @@ use ICanBoogie\I18n;
 
 use Brickrouge\Element;
 use Brickrouge\ElementIsEmpty;
-use Icybee\Binding\PrototypedBindings;
+
+use Icybee\Binding\Core\PrototypedBindings;
 
 /**
  * A selector for the available editors.
+ *
+ * @property-read \ICanBoogie\Core|Binding\CoreBindings $app
  */
 class SelectorElement extends Element
 {
@@ -26,7 +29,7 @@ class SelectorElement extends Element
 
 	public function __construct(array $attributes = [])
 	{
-		$options = array();
+		$options = [];
 
 		foreach ($this->app->editors as $id => $editor)
 		{

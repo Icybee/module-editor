@@ -14,12 +14,14 @@ namespace Icybee\Modules\Editor;
 use Brickrouge\Document;
 use Brickrouge\Element;
 
-use Icybee\Binding\PrototypedBindings;
+use Icybee\Binding\Core\PrototypedBindings;
 
 /**
  * An element that can change its editor.
  *
  * @property Element $editor The editor element.
+ *
+ * @property-read \ICanBoogie\Core|Binding\CoreBindings $app
  */
 class MultiEditorElement extends Element
 {

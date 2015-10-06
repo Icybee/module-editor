@@ -14,7 +14,8 @@ namespace Icybee\Modules\Editor;
 use ICanBoogie\Errors;
 use ICanBoogie\I18n;
 use ICanBoogie\Operation;
-use Icybee\Binding\PrototypedBindings;
+
+use Icybee\Binding\Core\PrototypedBindings;
 
 /**
  * Returns a new pane for the {@link TabbableEditor}.
