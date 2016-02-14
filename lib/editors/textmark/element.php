@@ -11,6 +11,7 @@
 
 namespace Icybee\Modules\Editor;
 
+use Brickrouge\Document;
 use Brickrouge\Element;
 
 /**
@@ -18,11 +19,16 @@ use Brickrouge\Element;
  */
 class TextmarkEditorElement extends Element implements EditorElement
 {
+	static protected function add_assets(Document $document)
+	{
+		$document->css->add(__DIR__ . '/element.css');
+	}
+
 	public function __construct(array $attributes = [])
 	{
 		parent::__construct('textarea', $attributes + [
 
-			'class' => 'editor textmark'
+			'class' => 'editor editor--markdown form-control'
 
 		]);
 	}

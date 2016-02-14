@@ -125,7 +125,7 @@ class MultiEditorElement extends Element
 				Element::LABEL_POSITION => 'before',
 
 				'name' => $this[self::SELECTOR_NAME],
-				'class' => 'editor-selector',
+				'class' => 'editor-selector form-control form-control-inline',
 				'value' => $editor_id
 
 			]);
