@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Editor\Operation;
 
-use ICanBoogie\Errors;
+use ICanBoogie\ErrorCollection;
 use ICanBoogie\Operation;
 
 use Icybee\Binding\Core\PrototypedBindings;
@@ -33,7 +33,10 @@ class ChangeOperation extends Operation
 		] + parent::get_controls();
 	}
 
-	protected function validate(Errors $errors)
+	/**
+	 * @inheritdoc
+	 */
+	protected function validate(ErrorCollection $errors)
 	{
 		$request = $this->request;
 
@@ -52,7 +55,7 @@ class ChangeOperation extends Operation
 			$errors->add('contents_name', "The %property is required.", [ 'property' => 'contents_name' ]);
 		}
 
-		return !$errors->count();
+		return $errors;
 	}
 
 	protected function process()

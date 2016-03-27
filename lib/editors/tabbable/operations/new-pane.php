@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Editor;
 
-use ICanBoogie\Errors;
+use ICanBoogie\ErrorCollection;
 use ICanBoogie\I18n;
 use ICanBoogie\Operation;
 
@@ -29,14 +29,14 @@ class TabbableNewPaneOperation extends Operation
 	 *
 	 * @inheritdoc
 	 */
-	protected function validate(Errors $errors)
+	protected function validate(ErrorCollection $errors)
 	{
 		if (!$this->request['control_name'])
 		{
 			$errors->add('control_name', "The %identifier is required.", [ 'identifier' => 'control_name' ]);
 		}
 
-		return true;
+		return $errors;
 	}
 
 	/**
