@@ -23,14 +23,14 @@ class PHPEditorElement extends Element implements EditorElement
 	{
 		parent::add_assets($document);
 
-		$document->css->add('assets/editor.css');
+		$document->css->add(__DIR__ . '/assets/editor.css');
 	}
 
 	public function __construct(array $attributes = [])
 	{
 		parent::__construct('textarea', $attributes + [
 
-			'class' => 'editor code php'
+			'class' => 'form-control editor code php'
 
 		]);
 	}

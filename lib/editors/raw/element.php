@@ -22,7 +22,7 @@ class RawEditorElement extends Element implements EditorElement
 	{
 		parent::__construct('textarea', $attributes + [
 
-			'class' => 'editor raw'
+			'class' => 'form-control editor raw'
 
 		]);
 	}
