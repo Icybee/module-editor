@@ -6,7 +6,13 @@ CSS_FILES = \
 	mooeditable/Assets/MooEditable/MooEditable.css \
 	mooeditable/Assets/MooEditable/MooEditable.Paste.css
 
-JS_COMPRESSOR = curl -X POST -s --data-urlencode 'input@$^' http://javascript-minifier.com/raw
+JS_COMPRESSOR = curl -s \
+	-d compilation_level=SIMPLE_OPTIMIZATIONS \
+	-d output_format=text \
+	-d output_info=compiled_code \
+	--data-urlencode "js_code@$^" \
+	http://closure-compiler.appspot.com/compile
+
 JS_COMPRESSED = assets/editor.js
 JS_UNCOMPRESSED = assets/editor-uncompressed.js
 

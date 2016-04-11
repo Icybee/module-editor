@@ -1,26 +1,29 @@
-@CHARSET "UTF-8";
-
 .editor--tabbable > .tabbable > .nav-tabs {
 	border-bottom: 0;
 	margin: 0
 }
 
+.editor--tabbable .nav-link .close {
+	margin-left: .5rem;
+}
+
+/*
 .editor--tabbable > .nav-tabs > .active > a,
 .editor--tabbable > .nav-tabs > .active > a:hover {
 	border-color: #ccc #ccc transparent #ccc;
 }
-
+*/
+/*
 .editor--tabbable > .tabbable > .nav-tabs .close {
 	float: right;
 	margin-left: 9px;
-	line-height: inherit;
 	display: none;
 }
 
 .editor--tabbable > .tabbable:not(.lonely-tab) > .nav-tabs .active .close {
 	display: block;
 }
-
+*/
 .editor--tabbable .tab-content {
 	border-top-left-radius: 0;
 }

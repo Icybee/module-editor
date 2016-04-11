@@ -98,17 +98,10 @@ EOT;
 
 		foreach ($panes as $i => $pane)
 		{
-			$tab = static::create_tab($pane);
-
-			if (!$i)
-			{
-				$tab->add_class('active');
-			}
-
-			$html .= $tab;
+			$html .= static::create_tab($pane, $i === 0);
 		}
 
-		$html .= '<li><a href="#" title="Nouvel onglet" data-create="tab">+</a></li>';
+		$html .= '<li class="nav-item"><a class="nav-link" href="#" title="Nouvel onglet" data-create="tab">+</a></li>';
 
 		return '<ul class="nav nav-tabs">' . $html . '</ul>';
 	}
@@ -138,10 +131,11 @@ EOT;
 	 * The method is also used by the {@link TabbableNewPaneOperation}.
 	 *
 	 * @param array $pane
+	 * @param bool $is_active
 	 *
-	 * @return \Brickrouge\Element
+	 * @return Element
 	 */
-	static public function create_tab(array $pane)
+	static public function create_tab(array $pane, $is_active = false)
 	{
 		return new Element('li', [
 
@@ -151,11 +145,14 @@ EOT;
 
 					Element::INNER_HTML => '<span class="title" data-recieves="title">' . $pane['title'] . '</span><span class="close" data-removes="tab">&times;</span>',
 
+					'class' => 'nav-link' . ($is_active ? ' active' : ''),
 					'href' => '#',
 					'data-toggle' => 'tab',
 					'tabindex' => -1
 				])
-			]
+			],
+
+			'class' => 'nav-item'
 		]);
 	}
 
@@ -166,7 +163,7 @@ EOT;
 	 *
 	 * @param array $pane
 	 *
-	 * @return \Brickrouge\Element
+	 * @return Element
 	 */
 	static public function create_pane(array $pane)
 	{
