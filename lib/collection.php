@@ -12,7 +12,7 @@
 namespace Icybee\Modules\Editor;
 
 use ICanBoogie\Accessor\AccessorTrait;
-use ICanBoogie\Core;
+use ICanBoogie\Application;
 use ICanBoogie\OffsetNotDefined;
 
 /**
@@ -26,11 +26,11 @@ class Collection implements \ArrayAccess, \IteratorAggregate
 	 * The collection is created from the `editors` config and can be altered with an event hook
 	 * on the `Icybee\Modules\Editor\Collection::alter` event.
 	 *
-	 * @param Core $app
+	 * @param Application $app
 	 *
 	 * @return \Icybee\Modules\Editor\Collection
 	 */
-	static public function prototype_get_editors(Core $app)
+	static public function prototype_get_editors(Application $app)
 	{
 		$definitions = (array) $app->configs->synthesize('editors', 'merge');
 		$collection = new static($definitions);

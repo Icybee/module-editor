@@ -11,6 +11,8 @@
 
 namespace Icybee\Modules\Editor;
 
+use function ICanBoogie\app;
+
 /**
  * "Tabbable" editor.
  */
@@ -23,12 +25,12 @@ class TabbableEditor implements Editor
 	 */
 	public function serialize($content)
 	{
-		$panes = array();
+		$panes = [];
 
 		if ($content && is_array($content))
 		{
 			/* @var $editors Collection */
-			$editors = \ICanBoogie\app()->editors;
+			$editors = app()->editors;
 
 			foreach ($content as $properties)
 			{

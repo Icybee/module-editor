@@ -14,11 +14,11 @@ namespace Icybee\Modules\Editor\Binding;
 use Icybee\Modules\Editor\Collection as EditorCollection;
 
 /**
- * {@link \ICanBoogie\Core} prototype bindings.
+ * {@link \ICanBoogie\Application} prototype bindings.
  *
  * @property EditorCollection $editors
  */
-trait CoreBindings
+trait ApplicationBindings
 {
 
 }

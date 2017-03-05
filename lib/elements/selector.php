@@ -11,17 +11,13 @@
 
 namespace Icybee\Modules\Editor;
 
-use ICanBoogie\I18n;
+use ICanBoogie\Binding\PrototypedBindings;
 
 use Brickrouge\Element;
 use Brickrouge\ElementIsEmpty;
 
-use Icybee\Binding\Core\PrototypedBindings;
-
 /**
  * A selector for the available editors.
- *
- * @property-read \ICanBoogie\Core|Binding\CoreBindings $app
  */
 class SelectorElement extends Element
 {

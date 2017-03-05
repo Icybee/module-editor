@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Editor;
 
-use ICanBoogie\Core;
+use function ICanBoogie\app;
 
 /**
  * "Node" editor.
@@ -54,6 +54,6 @@ class NodeEditor implements Editor
 	 */
 	public function render($content)
 	{
-		return $content ? \ICanBoogie\app()->models['nodes'][$content] : null;
+		return $content ? app()->models['nodes'][$content] : null;
 	}
 }

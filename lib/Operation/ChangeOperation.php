@@ -11,14 +11,14 @@
 
 namespace Icybee\Modules\Editor\Operation;
 
+use ICanBoogie\Binding\PrototypedBindings;
 use ICanBoogie\ErrorCollection;
 use ICanBoogie\Operation;
 
-use Icybee\Binding\Core\PrototypedBindings;
 use Icybee\Modules\Editor\MultiEditorElement;
 
 /**
- * Changes multieditor editor.
+ * Changes multi-editor editor.
  */
 class ChangeOperation extends Operation
 {

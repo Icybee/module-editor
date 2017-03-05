@@ -13,8 +13,7 @@ namespace Icybee\Modules\Editor;
 
 use Brickrouge\Document;
 use Brickrouge\Element;
-
-use Icybee\Binding\Core\PrototypedBindings;
+use ICanBoogie\Binding\PrototypedBindings;
 
 /**
  * RTE editor element.

@@ -11,9 +11,10 @@
 
 namespace Icybee\Modules\Editor;
 
+use function ICanBoogie\app;
+
 use Brickrouge\Document;
 use Brickrouge\Element;
-use Brickrouge\Form;
 use Brickrouge\Group;
 use Brickrouge\Text;
 
@@ -169,7 +170,7 @@ EOT;
 	{
 		$editor_id = $pane['editor_id'];
 		$name = $pane['name'];
-		$editor = \ICanBoogie\app()->editors[$editor_id];
+		$editor = app()->editors[$editor_id];
 		$value = null;
 
 		if (!empty($pane['content']))

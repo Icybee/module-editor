@@ -11,6 +11,10 @@
 
 namespace Icybee\Modules\Editor;
 
+use function ICanBoogie\app;
+use function ICanBoogie\format;
+use function ICanBoogie\normalize;
+
 /**
  * "Widgets" editor.
  */
@@ -58,7 +62,7 @@ class WidgetsEditor implements Editor
 			return null;
 		}
 
-		$availables = \ICanBoogie\app()->configs->synthesize('widgets', 'merge');
+		$availables = app()->configs->synthesize('widgets', 'merge');
 
 		if (!$availables)
 		{
@@ -70,7 +74,7 @@ class WidgetsEditor implements Editor
 
 		if ($undefined)
 		{
-			throw new \Exception(\ICanBoogie\format('Undefined widget(s): :list', [ ':list' => implode(', ', array_keys($undefined)) ]));
+			throw new \Exception(format('Undefined widget(s): :list', [ ':list' => implode(', ', array_keys($undefined)) ]));
 		}
 
 		$list = array_intersect_key($availables, $selected);
@@ -85,7 +89,7 @@ class WidgetsEditor implements Editor
 
 		foreach ($list as $id => $widget)
 		{
-			$html .= '<div id="widget-' . \ICanBoogie\normalize($id) . '" class="widget">' . $this->render_widget($widget, $id) . '</div>';
+			$html .= '<div id="widget-' . normalize($id) . '" class="widget">' . $this->render_widget($widget, $id) . '</div>';
 		}
 
 		return $html;
@@ -107,13 +111,13 @@ class WidgetsEditor implements Editor
 			}
 			else if (substr($file, -5, 5) == '.html')
 			{
-				$patron = new \Patron\Engine;
+				$patron = \Patron\get_patron();
 
 				return $patron(file_get_contents($file), null, [ 'file' => $file ]);
 			}
 			else
 			{
-				throw new \Exception(\ICanBoogie\format('Unable to process file %file, unsupported type', array('%file' => $file)));
+				throw new \Exception(format('Unable to process file %file, unsupported type', [ '%file' => $file ]));
 			}
 		}
 		else if (isset($widget['module']) && isset($widget['block']))
@@ -122,7 +126,7 @@ class WidgetsEditor implements Editor
 		}
 		else
 		{
-			throw new \Exception(\ICanBoogie\format('Unable to render widget %widget, its description is invalid.', array('%widget' => $id)));
+			throw new \Exception(format('Unable to render widget %widget, its description is invalid.', [ '%widget' => $id ]));
 		}
 	}
 }

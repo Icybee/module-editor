@@ -13,7 +13,7 @@
 >
 	<testsuites>
 		<testsuite name="icybee/module-editor">
-			<directory>./tests</directory>
+			<directory>./tests/lib</directory>
 		</testsuite>
 	</testsuites>
 
