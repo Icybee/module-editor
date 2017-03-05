@@ -24,13 +24,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetEditor()
 	{
-		$c = new Collection
-		(
-			array
-			(
-				'raw' => __NAMESPACE__ . '\RawEditor'
-			)
-		);
+		$c = new Collection([
+
+			'raw' => __NAMESPACE__ . '\RawEditor'
+
+		]);
 
 		$this->assertInstanceOf('Icybee\Modules\Editor\Editor', $c['raw']);
 	}
@@ -40,13 +38,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCannotModifyInstantiatedEditorDefinition()
 	{
-		$c = new Collection
-		(
-			array
-			(
-				'raw' => __NAMESPACE__ . '\RawEditor'
-			)
-		);
+		$c = new Collection([
+
+			'raw' => __NAMESPACE__ . '\RawEditor'
+
+		]);
 
 		$editor = $c['raw'];
 

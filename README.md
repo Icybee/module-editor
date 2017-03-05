@@ -1,4 +1,11 @@
-# Editor [![Build Status](https://travis-ci.org/Icybee/module-editor.png?branch=master)](https://travis-ci.org/Icybee/module-editor)
+# Editor 
+
+[![Packagist](https://img.shields.io/packagist/v/icybee/module-editor.svg)](https://packagist.org/packages/icybee/module-editor)
+[![Build Status](https://img.shields.io/travis/Icybee/module-editor.svg)](http://travis-ci.org/Icybee/module-editor)
+[![HHVM](https://img.shields.io/hhvm/Icybee/module-editor.svg)](http://hhvm.h4cc.de/package/Icybee/module-editor)
+[![Code Quality](https://img.shields.io/scrutinizer/g/Icybee/module-editor.svg)](https://scrutinizer-ci.com/g/Icybee/module-editor)
+[![Code Coverage](https://img.shields.io/coveralls/Icybee/module-editor.svg)](https://coveralls.io/r/Icybee/module-editor)
+[![Downloads](https://img.shields.io/packagist/dt/icybee/module-editor.svg)](https://packagist.org/packages/icybee/module-editor/stats)
 
 The Editor module (`editor`) provides an API to manage and use editors, and comes with several
 editors.
@@ -412,7 +419,8 @@ directory can later be cleaned with the `make clean` command.
 
 The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 
-[![Build Status](https://travis-ci.org/Icybee/module-editor.png?branch=master)](https://travis-ci.org/Icybee/module-editor)
+[![Build Status](https://img.shields.io/travis/Icybee/module-editor.svg)](http://travis-ci.org/Icybee/module-editor)
+[![Code Coverage](https://img.shields.io/coveralls/Icybee/module-editor.svg)](https://coveralls.io/r/Icybee/module-editor)
 
 
 
