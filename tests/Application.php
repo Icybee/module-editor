@@ -4,7 +4,7 @@ namespace ICanBoogie;
 
 use Icybee\Modules\Editor\Binding\ApplicationBindings;
 
-class Application extends Core
+class Application extends ApplicationAbstract
 {
 	use ApplicationBindings;
 }
