@@ -11,9 +11,7 @@
 
 namespace Icybee\Modules\Editor;
 
-use ICanBoogie\Operation;
-
-use Brickrouge\Element;
+use function ICanBoogie\app;
 
 /**
  * RTE editor.
@@ -53,7 +51,7 @@ class RTEEditor implements Editor
 			return $content;
 		}
 
-		$app = \ICanBoogie\app();
+		$app = app();
 
 		$transform_img = new TransformImg(function($id) use ($app) {
 

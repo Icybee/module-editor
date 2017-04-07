@@ -11,8 +11,9 @@
 
 namespace Icybee\Modules\Editor;
 
-use Brickrouge\Alert;
+use function ICanBoogie\app;
 
+use Brickrouge\Alert;
 use Brickrouge\Document;
 use Brickrouge\Element;
 
@@ -42,7 +43,7 @@ class WidgetsEditorElement extends Element implements EditorElement
 
 	public function render_inner_html()
 	{
-		$config = \ICanBoogie\app()->configs->synthesize('widgets', 'merge');
+		$config = app()->configs->synthesize('widgets', 'merge');
 
 		if (!$config)
 		{

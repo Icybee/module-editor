@@ -11,6 +11,8 @@
 
 namespace Icybee\Modules\Editor;
 
+use function ICanBoogie\app;
+
 /**
  * "Image" editor.
  */
@@ -54,6 +56,6 @@ class ImageEditor implements Editor
 	 */
 	public function render($content)
 	{
-		return $content ? \ICanBoogie\app()->models['images'][$content] : null;
+		return $content ? app()->models['images'][$content] : null;
 	}
 }

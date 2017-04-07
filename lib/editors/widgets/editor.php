@@ -122,7 +122,7 @@ class WidgetsEditor implements Editor
 		}
 		else if (isset($widget['module']) && isset($widget['block']))
 		{
-			return \ICanBoogie\app()->modules[$widget['module']]->getBlock($widget['block']);
+			return app()->modules[$widget['module']]->getBlock($widget['block']);
 		}
 		else
 		{

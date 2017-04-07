@@ -11,6 +11,7 @@
 
 namespace Icybee\Modules\Editor;
 
+use function ICanBoogie\app;
 use Brickrouge\A;
 
 /**
@@ -99,7 +100,7 @@ EOT;
 	{
 		$editor_id = $pane['editor_id'];
 		$serialized_content = $pane['serialized_content'];
-		$editor = \ICanBoogie\app()->editors[$editor_id];
+		$editor = app()->editors[$editor_id];
 
 		return $editor->render($editor->unserialize($serialized_content));
 	}
