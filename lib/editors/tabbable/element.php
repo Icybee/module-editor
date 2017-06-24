@@ -144,7 +144,7 @@ EOT;
 
 				new Element('a', [
 
-					Element::INNER_HTML => '<span class="title" data-recieves="title">' . $pane['title'] . '</span><span class="close" data-removes="tab">&times;</span>',
+					Element::INNER_HTML => '<span class="title" data-receives="title">' . $pane['title'] . '</span><span class="close" data-removes="tab">&times;</span>',
 
 					'class' => 'nav-link' . ($is_active ? ' active' : ''),
 					'href' => '#',
